@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		
+		<title>
+			SCE - System Calculator from Evaluation
+		</title>
+		
+		<meta content="description" text="research">
+
+		<!-- Style -->
+			<link href="css/sce_style.css" rel="stylesheet" type="text/css" />
+		<!-- Style -->
+
+	</head>
+
+	<body>
+		
+		<header>
+			<div id="tarja_top"></div>
+
+			<div id="top_panel" class="left">
+			
+				<div id="loginbox" class="left">
+					<br/>
+
+					<ul class="left">
+						
+						<li>
+							<a class="loginbox_link" href="/?module=home"><p>Home</p></a>
+						</li>
+						
+						<li>
+							<a class="loginbox_link" href="/?module=register"><p>Registrar-se</p></a>
+						</li>
+						
+						<li id="login_dropdown">
+							<a id="login-click" href="javascript:void(0);"><p>Login <span>&#x25BC;</span></p></a>
+							
+							<div id="login-content">
+								<form action="/" method="post">
+									<div id="inputs">
+										<p><input id="username" size="12" type="email" name="login" placeholder="Email" required>
+										<input id="password" size="12" type="password" name="password" placeholder="Senha" required></p>
+									</div>
+									<div id="actions">
+										<p><button type="submit" name="acessar">Enviar</button></p>
+									</div>
+								</form>
+							</div>
+
+						</li>
+					</ul>	
+					
+					<br/>
+
+				</div>
+
+				<div id="searchbox" class="right">
+
+					<p>
+						<select id="search_type" name="item" title="Escolha um tipo">
+							<option>Operadora</option>
+							<option>Produtos</option>
+							<option>Servi&ccedil;os</option>
+						</select>
+						
+						<input type="text" placeholder="Pesquisar" name="search" size="20" id="search" onkeyup="searchSuggest();" autocomplete="off"  title="Campo de busca" />
+						
+						<!--<button type="submit" name="search_button" id="searchbutton" title="Buscar" size="15" class="right" onclick="getSearch();">Buscar</button> -->
+					</p>
+					
+					<div id="suggests"></div>
+
+				</div>
+
+			</div>
+			
+			<div id="tarja_bottom"></div>
+			
+				<div id="top_menu">
+				
+				</div>
+
+		</header>
+
+
+		<section>
+
+			<div id="main_column" class="left">
+			
+
+				{% block register %}
+
+					<h1 align="center">News</h1>
+
+				{% endblock register %}
+					
+
+
+			</div>
+
+		</section>
+
+
+		<footer>
+
+			<p align="center">Copyleft by GPL v.3.</p>
+
+		</footer>
+
+
+			<script type="text/javascript" src="/javascript/jquery-2.0.2.js"></script>
+			<script type="text/javascript" src="/javascript/functions.js"></script>
+			<script type="text/javascript" src="/javascript/jquery.rateit.js"></script>
+			<script type="text/javascript" src="/javascript/jquery.maskedinput.js"></script>
+
+	</body>
+
+
+</html> 
+
+
+
+

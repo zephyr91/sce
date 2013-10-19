@@ -1,0 +1,102 @@
+{% extends "main.html" %}
+
+
+
+{% block send_evaluation %}
+<div id="send_evaluation" class="main_column">
+
+
+	{% if gerarFormulario == false %}
+	
+	<p><h3 align="center">Pesquisar</h3></p>
+	<br/>	
+	<p>
+
+		<form action="/" method="get">
+			<input type="hidden" name="module" value="sendeval">
+			<select id="search_type_eval" name="item" title="Escolha um tipo">
+				<option>Produtos</option>
+				<option>Servi&ccedil;os</option>
+			</select>
+			
+			<input type="text" placeholder="Pesquisar" name="search" size="20" id="searchEval" onkeyup="searchSuggestEval();" autocomplete="off" title="Campo de busca" />
+			
+			<button type="submit" name="gerarAvaliacao" id="gerarAvaliacao" size="15">Gerar Avaliação</button>
+			
+		<div id="suggestsEval"></div>
+
+		</form>
+
+	</p>
+	
+	{% endif %}
+	
+	<!-- estrelas pequenas
+	<div class="rateit" id="rateit5" data-rateit-min="2">
+	</div>
+	<div>
+    <span id="value5"></span>
+    <span id="hover5"></span>
+	</div>
+	-->
+ 
+	{% if gerarFormulario == true %}
+	
+	<p><h3 align="center">Realização de Avaliação</h3></p>
+	<br/>
+	<p><h3 align="center">{{item}}</h3><p>
+	<br>
+	<p>
+		<label class="questao">{{questao1}}</label>
+	</p>
+	<p>
+		<div class="rateit bigstars" onclick="document.getElementById('nota1').value = $('#questao1').rateit('value')" id="questao1" data-rateit-starwidth="32" data-rateit-starheight="32">
+			<input type="hidden" name="nota1" id="nota1">
+		</div>
+	</p>
+	
+	<p>
+		<label class="questao">{{questao2}}</label>
+	</p>
+	<p>
+		<div class="rateit bigstars" onclick="document.getElementById('nota2').value = $('#questao2').rateit('value')" id="questao2" data-rateit-starwidth="32" data-rateit-starheight="32">
+			<input type="hidden" name="nota2" id="nota2">
+		</div>
+	</p>
+	
+	<p>
+		<label class="questao">{{questao3}}</label>
+	</p>
+	<p>
+		<div class="rateit bigstars" onclick="document.getElementById('nota3').value = $('#questao3').rateit('value')" id="questao3" data-rateit-starwidth="32" data-rateit-starheight="32">
+			<input type="hidden" name="nota3" id="nota3">
+		</div>
+	</p>
+	
+	<p>
+		<label class="questao">{{questao4}}</label>
+	</p>
+	<p>
+		<div class="rateit bigstars" onclick="document.getElementById('nota4').value = $('#questao4').rateit('value')" id="questao4" data-rateit-starwidth="32" data-rateit-starheight="32">
+			<input type="hidden" name="nota4" id="nota4">
+		</div>
+	</p>
+	
+	<p>
+		<label class="questao">{{questao5}}</label>
+	</p>
+	<p>
+		<div class="rateit bigstars" onclick="document.getElementById('nota5').value = $('#questao5').rateit('value')" id="questao5" data-rateit-starwidth="32" data-rateit-starheight="32">
+			<input type="hidden" name="nota5" id="nota5">
+		</div>
+	</p>
+	
+	<div>
+    <button onclick="">Valor da primeira questao</button>
+	<button type="submit" name="enviaraval" id="enviaraval">Enviar Avaliação</button>
+	</div>
+	
+	{% endif %}
+	
+</div>
+{% endblock send_evaluation %}

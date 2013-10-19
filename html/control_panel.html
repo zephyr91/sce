@@ -1,0 +1,115 @@
+{% extends "main.html" %}
+
+
+{% block control_panel %}
+
+{% if permission == 'A' %}
+	
+	<div id="panel_administrador" class="left main_column">
+	
+	<h3 align="center">Painel administrativo</h3>
+	</br>
+	<p><b>Olá, </b>{{nome}}</p>
+	
+		<a class="left main_column" href="/?module=panel&adminpanel=manteroperadora"><p>Adicionar ou editar dados de Operadoras</p></a>
+		</br>
+		<a class="left main_column" href="/?module=panel&adminpanel=manterproduto"><p>Adicionar ou editar dados de Produtos</p></a>
+		</br>
+		<a class="left main_column" href="/?module=panel&adminpanel=manterservico"><p>Adicionar ou editar dados de Serviços</p></a>
+		</br>
+		<a class="left main_column" href="/?module=panel&adminpanel=manterusuario"><p>Editar dados de Usuários</p></a>
+		</br>
+	
+		<div id="adm_blocks" class="left">
+
+		<!--
+		{% block manteroperadora %}
+
+		{% endblock manteroperadora %}
+		
+		{% block manterproduto %}
+		
+		{% endblock manterproduto %}
+		
+		{% block manterservico %}
+		
+		{% endblock manterservico %}
+		!-->
+		</div>
+	
+	</div>
+	
+
+
+{% else %}
+
+	{% if tipouser == 'fisico' %}
+
+	<div id="panel_fisico" class="left main_column">
+	
+		<h3 align="center">Dados do usuário</h3>
+		<p><b>Nome: </b><span class="cp-nome">{{nome}}</span></p>
+		<p><b>Data de Nascimento: </b><span class="cp-dtnasc">{{dtnasc}}</span></p>
+		<p><b>Email: </b><span class="cp-email">{{email}}</span></p>
+		<p><b>Endereço: </b><span class="cp-endereco">{{endereco}}</span></p>
+		<p><b>Telefone Principal: </b><span class="cp-tel-princ">{{tel_princ}}</span></p>
+		<p><b>Telefone Opcional: </b><span class="cp-tel-op">{{tel_op}}</span></p>
+		<!--atributos especificos de user fisico-->
+		<p><b>RG: </b>{{rg}}</p>
+		<p><b>CPF: </b>{{cpf}}</p>
+		<p><b>Sexo: </b>{{sexo}}</p>
+		<!--ao clicar no botao editar colocar algo em JS ou jquery, abrir um input text talvez, que permita editar ALGUNS dos atributos (ex: email NAO)-->
+		<p><button onclick="editUser();" type="submit" name="editar_user">Editar dados</button></p>
+	</div>
+	
+	<div id="edit_dados" class="left main_column">
+		<h3 align="center">Edição de dados</h3>
+
+	</div>
+	<!-- essa parte teria que ser somente do usuario fisico-->	
+
+	<div id="cupoms_eval" class="right main_column"> 
+		<h3 align="center">Cupoms e avaliações</h3>
+		
+		<!-- n? cupoms abaixo dos dados caso o user seja fisico. o que mais colocariamos aqui do user consumidor, avalia?es? -->
+		<p>Quantidade de cupoms disponíveis: {{cupom}}</p>
+
+	
+	</div>
+
+	{% elseif tipouser == 'juridico' %}
+
+	<!-- essa parte teria que ser somente do usuario juridico-->
+	<div id="panel_juridico" class="left main_column">
+	
+		<h3 align="center">Dados da empresa</h3>
+		<p><b>Nome: </b>{{nome}}</p>
+		<p><b>Data de criação: </b>{{dtnasc}}</p>
+		<p><b>Email: </b>{{email}}</p>
+		<p><b>Endereço: </b>{{endereco}}</p>
+		<p><b>Telefone Principal: </b>{{tel_princ}}</p>
+		<p><b>Telefone Opcional: </b>{{tel_op}}</p>
+		<!--atributos especificos de user juridico-->
+		<p><b>CNPJ: </b>{{cnpj}}</p>
+		<!--ao clicar no botao editar colocar algo em JS ou jquery, abrir um input text talvez, que permita editar ALGUNS dos atributos (ex: email NAO)-->
+		<p><button type="submit" name="editar_user">Editar dados</button></p>
+	
+	</div>
+
+	<div id="assinatura_eval" class="right main_column">
+		<h3 align="center">Assinatura</h3>
+
+		<!--para a operadora com assinatura-->
+		<p>Quantidade de dias restantes da assinatura: {{dias}}<br></p>
+		
+		<!--botao para acesso ao sistema externo de pagamento?-->
+		<p><button type="submit" name="pagamento">Realizar assinatura</button></p>
+	
+	</div>
+
+	{% endif %}
+	
+{% endif %}
+
+
+{% endblock control_panel %}

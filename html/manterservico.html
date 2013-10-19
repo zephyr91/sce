@@ -1,0 +1,29 @@
+{% extends "main.html" %}
+
+{% block admin_manter %}
+
+<div id="adicionarservico" class="left main_column">
+	
+	<h3 align="center">Adicionar novo serviço</h3>
+	
+	<form id="servico_form" action="/" method="post">
+		<br/>
+		
+		<p><label><b>Nome: </b></label><input type="text" id="nome" name="se_nome" size="30" maxlength="150" required></p>
+		
+		<p><label><b>Descrição: </b></label><textarea id="pr_descricao" name="se_descricao" rows="10" cols="70" maxlength="500" ></p>
+		
+		<p><input type="submit" name="cadastrar_servico" value="Enviar"></p>
+		<p><button onclick="voltarHistory();" type="submit" name="voltar_pagina">Voltar</button></p>
+	</form>
+	
+</div>
+
+<div id="editarservico" class="right main_column">
+
+	<h3 align="center">Editar dados de serviços</h3>
+	
+	
+</div>
+
+{% endblock admin_manter %}

@@ -1,0 +1,14 @@
+{
+    "name": "david/sce",
+    "license": "GPL V3",
+    "authors": [
+        {
+            "name": "David Henrique Langbajn",
+            "email": "zephyr91@gmail.com"
+        }
+    ],
+    "require": {
+	"twig/twig": "1.*"
+
+    }
+}

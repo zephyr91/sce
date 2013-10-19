@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+
+		<title>
+			SCE - System Calculator from Evaluation
+		</title>
+		
+		<meta content="description" text="research">
+
+		<!-- Style -->
+			<link href="css/sce_style.css" rel="stylesheet" type="text/css" />
+		<!-- Style -->
+
+	</head>
+
+	<body>
+		<header>
+			<div id="tarja_top"></div>
+
+			<div id="top_panel" class="left">
+			
+				<div id="loginbox" class="left">
+					<br/>
+
+					<ul class="left">
+						<li>
+							<p class="bemvindo">Bem vindo, {{ nome }} </p>
+						</li>
+
+						<br/>
+
+						<li>
+							<a class="loginbox_link" href="/?module=home"><p>Home</p></a>
+						</li>
+
+						{% if tipouser == 'fisico' %}
+						<li>
+							<a class="loginbox_link" href="/?module=myeval"><p>Minhas Avaliações Recentes</p></a>
+						</li>
+						
+						<li>
+							<a class="loginbox_link" href="/?module=sendeval"><p>Enviar Avaliações</p></a>
+						</li>
+						{% elseif tipouser == 'juridico' %}
+						<li>
+							<a class="loginbox_link" href="/?module=myeval"><p>Minhas Avaliações Recentes</p></a>
+						</li>
+						
+						<li>
+							<a class="loginbox_link" href="#"><p>Relatorios</p></a>
+						</li>
+						{% endif %}
+						<li>
+							<a class="loginbox_link" href="/?module=panel"><p>Painel de Controle</p></a>
+						</li>
+						
+						<li>
+							<a class="loginbox_link" href="./php/logout.php"><p>Logout</p></a>
+						</li>
+					</ul>
+
+					<br/>
+
+				</div>
+
+				<div id="searchbox" class="right">
+					<br/>
+					<form action="/?module=search" method="get">
+					<p>
+						<select id="search_type" name="item" title="Escolha um tipo">
+							<option>Operadora</option>
+							<option>Produtos</option>
+							<option>Servi&ccedil;os</option>
+						</select>
+						
+						<input type="text" placeholder="Pesquisar" name="search" size="20" id="search" onkeyup="searchSuggest();" autocomplete="off" title="Campo de busca" />
+						
+						<button type="submit" name="search_button" id="searchbutton" title="Buscar" size="15" class="right">Buscar</button>
+					</p>
+					
+					<div id="suggests"></div>
+
+					</form>
+
+				</div>
+
+			</div>
+			
+			<div id="tarja_bottom"></div>
+			
+				<div id="top_menu">
+
+					{% block admin_panel %}
+
+					{% endblock admin_panel %}
+				
+				</div>
+
+		</header>
+
+
+
+		<section>
+
+			<div id="main_column" class="left">
+
+				{% block control_panel %}
+
+				{% endblock control_panel %}
+
+				{% block send_evaluation %}
+
+				{% endblock send_evaluation %}
+				
+				{% block admin_manter %}
+				
+				{% endblock admin_manter %}
+
+			</div>
+
+		</section>
+		
+		<footer>
+
+			<p align="center">Copyleft by GPL v.3.</p>
+
+		</footer>
+
+
+			<script type="text/javascript" src="/javascript/jquery-2.0.2.js"></script>
+			<script type="text/javascript" src="/javascript/functions.js"></script>
+			<script type="text/javascript" src="/javascript/jquery.rateit.js"></script>
+			<script type="text/javascript" src="/javascript/jquery.maskedinput.js"></script>
+
+	</body>
+
+</html> 
