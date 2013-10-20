@@ -70,7 +70,7 @@
 			else
 			{
 				require('php/user_register.php');
-				echo "<script>alert('Usuário registrado com sucesso, você ja pode realizar login em sua conta  (lembrando que seu login é seu email) !');</script>";
+				echo "<script>alert('Usuário registrado com sucesso, você ja pode realizar login em sua conta  (lembrando que seu login é o seu email registrado) !');</script>";
 				echo $twig->render('index.html');
 			}
 

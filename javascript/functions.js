@@ -197,10 +197,13 @@ function hideEditUser()
 
 		if (document.getElementById('search').value == "" )
 		{
+			document.getElementById('search_type').disabled=false;
 			document.getElementById('suggests').style.display="none";
+
 		}
 		else
 		{
+			document.getElementById('search_type').disabled=true;
 			document.getElementById('suggests').style.display="block";
 		}
 		
@@ -229,10 +232,10 @@ function hideEditUser()
 			{
 				//Build our element string.  This is cleaner using the DOM, but
 				//IE doesn't support dynamically added attributes.
-				var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+				var suggest = '<a onclick="getSearch();" href="javascript:void(0);"><div onmouseover="javascript:suggestOver(this);" ';
 				suggest += 'onmouseout="javascript:suggestOut(this);" ';
 				suggest += 'onclick="javascript:setSearch(this.innerHTML);" ';
-				suggest += 'class="suggest_link">' + str[i] + '</div>';
+				suggest += 'class="suggest_link">' + str[i] + '</div></a>';
 				ss.innerHTML += suggest;
 			}
 		}
@@ -337,4 +340,12 @@ function hideEditUser()
 	}
 
 	
-	
+	//Functions da avaliação
+	function enviarAval()
+	{
+		if (document.getElementById('nota1').value == '' || document.getElementById('nota1').value == 0 || document.getElementById('nota2').value == '' || document.getElementById('nota2').value == 0 || document.getElementById('nota3').value == '' || document.getElementById('nota3').value == 0 ||document.getElementById('nota4').value == '' || document.getElementById('nota4').value == 0 || document.getElementById('nota5').value == '' || document.getElementById('nota5').value == 0) 
+		{
+			alert("Por favor, avalie todas as questões");
+		}
+	}
+

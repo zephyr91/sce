@@ -70,7 +70,7 @@ switch ($module)
 		}
 		
 		require("php/send_evaluation.php");
-		echo $twig->render('send_evaluation.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'gerarFormulario' => $gerarFormulario, 'item' => $_GET['search'], 'questao1' => utf8_encode($resultado_questao[0]), 'questao2' => utf8_encode($resultado_questao[1]), 'questao3' => utf8_encode($resultado_questao[2]), 'questao4' => utf8_encode($resultado_questao[3]), 'questao5' => utf8_encode($resultado_questao[4])));
+		echo $twig->render('send_evaluation.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'gerarFormulario' => $gerarFormulario, 'item' => $_GET['search'], 'questao1' => utf8_encode($questoes[0][0]), 'questao2' => utf8_encode($questoes[1][0]), 'questao3' => utf8_encode($questoes[2][0]), 'questao4' => utf8_encode($questoes[3][0]), 'questao5' => utf8_encode($questoes[4][0])));
 		break;
 		
 };

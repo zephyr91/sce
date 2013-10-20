@@ -3,6 +3,9 @@
 	//Open Database;
 	$mysqli = new mysqli('localhost','guest','guest','sce');
 
+	$dsn = 'mysql:dbname=sce;host=localhost';
+	$dbh = new PDO($dsn, 'guest', 'guest');
+
 	if (isset($_GET['search']) && $_GET['search'] != '')
 	{
 
@@ -29,10 +32,10 @@
 			
 		}
 
-		$suggest_query = $mysqli->query($select);
+		$suggest_query = $dbh->query($select);
 
 
-		while($suggest = $suggest_query->fetch_array())
+		while($suggest = $suggest_query->fetch())
 		{
 			//Return each page title seperated by a newline.
 			echo utf8_encode($suggest['suggest'] . "\n");

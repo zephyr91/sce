@@ -21,12 +21,13 @@ if ($_POST['typespessoa'] == "fisica")
 	$date_final = date_format($date_formated, 'Y/m/d');
 
 	//Open Database as CORE;
-	$mysqli = new mysqli('localhost','core','core','sce');
+	$dsn = 'mysql:dbname=sce;host=localhost';
+	$dbh = new PDO($dsn, 'core', 'core');
 
 	//Checking if user exists;
 	$validate_user = "select nomeUsuario,email,senha,tipoAcesso from USUARIO where email='$email';";
-	$results = $mysqli->query($validate_user);
-	$validate = $results->num_rows;
+	$results = $dbh->query($validate_user);
+	$validate = $results->rowCount();
 
 	//If yes, break processing and return to register.html;
 	if ($validate == 1)
@@ -40,9 +41,9 @@ if ($_POST['typespessoa'] == "fisica")
 	else
 	{
 		$insert_user = "insert into USUARIO values ('','$nome','$date_final','$email','$senha','$endereco','$tel_princ','U','$tel_op');";
-		$resultado_user = $mysqli->query($insert_user);
+		$resultado_user = $dbh->query($insert_user);
 		$insert_type_user = "insert into CONSUMIDOR values ('$cpf','$rg','$sexo',(select idUsuario from USUARIO where nomeUsuario='$nome'));";
-		$resultado_type_user = $mysqli->query($insert_type_user);
+		$resultado_type_user = $dbh->query($insert_type_user);
 	}
 
 	//Close Connection;
@@ -68,12 +69,13 @@ else
 	$date_final = date_format($date_formated, 'Y/m/d');
 
 	//Open Database as CORE;
-	$mysqli = new mysqli('localhost','core','core','sce');
+	$dsn = 'mysql:dbname=sce;host=localhost';
+	$dbh = new PDO($dsn, 'core', 'core');
 
 	//Checking if user exists;
 	$validate_user = "select nomeUsuario,email,senha,tipoAcesso from USUARIO where email='$email';";
-	$results = $mysqli->query($validate_user);
-	$validate = $results->num_rows;
+	$results = $dbh->query($validate_user);
+	$validate = $results->rowCount();
 
 	//If yes, break processing and return to register.html;
 	if ($validate == 1)
@@ -88,10 +90,10 @@ else
 	{
 		//Insert User;
 		$insert_user = "insert into USUARIO values ('','$nome','$date_final','$email','$senha','$endereco','$tel_princ','U','$tel_op');";
-		$resultado_user = $mysqli->query($insert_user);
+		$resultado_user = $dbh->query($insert_user);
 		//Insert User Juridico;
 		$insert_type_user = "insert into JURIDICO values ('$cnpj',(select idUsuario from USUARIO where nomeUsuario='$nome'));";
-		$resultado_type_user = $mysqli->query($insert_type_user);
+		$resultado_type_user = $dbh->query($insert_type_user);
 	}
 
 	//Close Connection;

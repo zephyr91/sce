@@ -4,16 +4,18 @@ require '../bootstrap.php';
 
 session_start();
 
-$mysqli = new mysqli('localhost', 'guest', 'guest', 'sce');
+$dsn = 'mysql:dbname=sce;host=localhost';
+$dbh = new PDO($dsn, 'guest', 'guest');
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
 
-	$tipo = utf8_encode($_GET['item']);
+	$tipo = $_GET['item'];
 	$busca = $_GET['search'];
 
-	switch ($tipo) {
+	switch ($tipo)
+	{
 		case "Operadora":
 			$pesquisa = "Pesquisa de Operadoras";
 			$tipo = "OPERADORA";
@@ -23,23 +25,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 		case "Produtos":
 			$pesquisa = "Pesquisa de Produtos";
-			$tipo = "PRODUTOS";
-			$coluna = "nomeProdutos";
-			//$bus
-			$select = "select * from $tipo where $coluna='$busca';";
+			$tipo = "PRODUTO";
+			$coluna = "nomeProduto";
+			$busca_explode = explode(" (", $busca);
+			$operadora_explode = explode(")", $busca_explode[1]);
+			$select = "select * from $tipo t, OPERADORA o where $coluna='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and t.idOperadora = o.IdOperadora;";
 			break;
 
-		case "Serviço":
-			$pesquisa = utf8_encode("Pesquisa de Serviços");		
+		case "Serviços":
+			$pesquisa = "Pesquisa de Serviços";
 			$tipo = "SERVICO";
 			$coluna = "nomeServico";
+			$busca_explode = explode(" (", $busca);
+			$operadora_explode = explode(")", $busca_explode[1]);
+			$select = "select * from $tipo t, OPERADORA o where $coluna='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and t.idOperadora = o.IdOperadora;";
 			break;
 	}
 
-
-
-	$results = $mysqli->query($select);
-	$dados = $results->fetch_row();
+	$results = $dbh->query($select);
+	$dados = $results->fetch();
 
 	/*
 	    Criando formulario para edição;

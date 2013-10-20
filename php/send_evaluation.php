@@ -7,29 +7,68 @@
 	
 	$select_servico = "select nomeServico from SERVICO where nomeServico='$item';";
 
-	$results = $mysqli->query($select_servico);
+	$results = $dbh->query($select_servico);
 	
-	$num_result = $results->num_rows;
+	$num_result = $results->rowCount();
+
 
 	//verifica se é produto ou serviço o item pesquisado
 	if ($num_result == 1)
 	{
-		//$tipo_item = "servico";
+		$tipo_item = "servico";
 		$select_questao = "select texto from ESTRUTURA_QUESTAO where tipoQuestao='SERVICO';";
-		$result = $mysqli->query($select_questao);
-		$resultado_questao = $result->fetch_row();
+		$result = $dbh->query($select_questao);
+		
+
+		$questoes = [];
+		foreach($result->fetchAll() as $questao)
+		{
+			$questoes[] = $questao;
+		}
+
 	}
 	else
 	{
-		//$tipo_item = "produto";
+		$tipo_item = "produto";
 		$select_questao = "select texto from ESTRUTURA_QUESTAO where tipoQuestao='PRODUTO';";
-		$result = $mysqli->query($select_questao);
-		$resultado_questao = $result->fetch_all();
-		//while(list($resultado_questao) = $result->fetch_row());
-		//var_dump($resultado_questao);
-
+		$result = $dbh->query($select_questao);
+	
 		
-		//break;
+		$questoes = [];
+		foreach($result->fetchAll() as $questao)
+		{
+			$questoes[] = $questao;
+		}
+			//var_dump($questoes);
+			//break;
+	}
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		$comentario = $_POST['a_comentario'];
+		//$idusuario = "select idUsuario where email=$_SESSION['login']";
+		//$idoperadora = "select idOperadora";
+
+		if ($tipo_item = "produto")
+		{
+    	//$endereco=$_POST['ed_endereco'];
+    	//$tel_princ=$_POST['ed_tel_princ'];
+    	//$tel_op=$_POST['ed_tel_op'];
+
+    	$insert_aval = "insert into AVALIACAO values ('',);";
+
+    	$validate = $dbh->query($insert);
+    	$results = $validate->rowCount();
+
+    	}
+    	elseif ($tipo_item = "servico")
+    	{
+
+
+
+
+    	}
+ 
 	}
 	
 	
@@ -53,8 +92,3 @@
 	*/
 	
 ?>
-
-
-
-
-

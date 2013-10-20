@@ -42,10 +42,11 @@
  
 	{% if gerarFormulario == true %}
 	
-	<p><h3 align="center">Realização de Avaliação</h3></p>
+	<p><h1 align="center">Realização de Avaliação</h1></p>
 	<br/>
 	<p><h3 align="center">{{item}}</h3><p>
-	<br>
+	<p><h4 align="center">Avalie as questões numa escala de um a cinco</h4></p>
+
 	<p>
 		<label class="questao">{{questao1}}</label>
 	</p>
@@ -90,10 +91,13 @@
 			<input type="hidden" name="nota5" id="nota5">
 		</div>
 	</p>
+	<p>
+		<label class="left"><b>Comentário: </b></label><textarea class="left" id="comentario" name="a_comentario" rows="4" cols="70" maxlength="750"></textarea>
+	</p>
 	
-	<div>
-    <button onclick="">Valor da primeira questao</button>
-	<button type="submit" name="enviaraval" id="enviaraval">Enviar Avaliação</button>
+	<div id="zz" class="left">
+	<button type="submit" onclick="enviarAval()" name="enviaraval" id="enviaraval">Enviar Avaliação</button>
+	<button onclick="voltarHistory()" id="voltar">Voltar</button>
 	</div>
 	
 	{% endif %}
