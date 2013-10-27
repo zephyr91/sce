@@ -188,7 +188,34 @@ function getQuestao()
 
 function editQuestao()
 {
-
+	$.post("/php/manterquestao.php",
+			{
+				questao_descricao: $('#questao_descricao').val(),
+				list_tipos: $('#list_tipos').val(),
+				questao_escolhida: $('#list_questoes').val()
+			}, function(data) {
+			
+			if (data == "erro_questao_igual")
+			{
+				alert("Os dados estão iguais !\nCaso queira atualizar seus dados modifique o formulário.");
+			}
+			
+			else if (data == "erro_questao_vazio")
+			{
+				alert("A pergunta não pode ser vazia, por favor preencha a questão.");
+			}
+			
+			else if (data == "sucesso")
+			{
+				alert("Alteração executada com sucesso.");
+				
+			}
+			
+			else if (data == "erro_database")
+			{
+				alert("Erro ao tentar realizar alteração, Tente mais tarde.");
+			};
+		});
 }
 
 

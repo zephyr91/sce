@@ -51,28 +51,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 // Verifica se a entrada é por método post
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+	$ed_questao = $_POST['questao_descricao'];
+	$questao = $_POST['questao_escolhida'];
+	$tipo = $_POST['list_tipos'];
 
-/*
-Validando os dados do usuário;
-*/
-$endereco=$_POST['ed_endereco'];
-$tel_princ=$_POST['ed_tel_princ'];
-$tel_op=$_POST['ed_tel_op'];
 
-$select = "select endereco,telefonePrincipal,telefoneOpcional from USUARIO where endereco='$endereco' and telefonePrincipal='$tel_princ' and telefoneOpcional='$tel_op' and email='$email';";
+	/*
+	$select = "select endereco,telefonePrincipal,telefoneOpcional from USUARIO where endereco='$endereco' and telefonePrincipal='$tel_princ' and telefoneOpcional='$tel_op' and email='$email';";
 
-$validate = $dbh->query($select);
-$results = $validate->rowCount();
+	$validate = $dbh->query($select);
+	$results = $validate->rowCount();
+	*/
 
-if ($results != 0)
-{
-echo "erro";
-}
+	if ($ed_questao == "")
+	{
+		echo "erro_questao_vazio";
+	}
 
-else
-{
-$update_user = "UPDATE USUARIO SET endereco='$endereco', telefonePrincipal='$tel_princ', telefoneOpcional='$tel_op' WHERE email='$email';";
-$resultado_update = $dbh->query($update_user);
-echo "sucesso";
-}
+	elseif ($ed_questao == $questao)
+	{
+		echo "erro_questao_igual";
+	}
+
+	else
+	{
+		$select = " select texto from ESTRUTURA_QUESTAO where tipoQuestao='$tipo' and texto='$questao' ";
+		$result = $dbh->query($select);
+		$count = $result->rowCount();
+		if($count == 1)
+		{
+			$update = "update ESTRUTURA_QUESTAO set texto='$ed_questao' where texto='$questao' and tipoQuestao='$tipo';";
+			$update_result = $dbh->query($update);
+			echo "sucesso";
+		}
+		else
+		{
+			echo "erro_database";
+		}
+	}
 }

@@ -8,13 +8,13 @@
 	
 		<br/>
 
-		<p><label><b>Tipo: </b><label><select onchange="listQuestoes();" id="list_tipos"><option>Produto</option><option>Serviço</option></select></p>
+		<p><label><b>Tipo: </b><label><select onchange="listQuestoes();" id="list_tipos" name="list_tipos"><option>Produto</option><option>Serviço</option></select></p>
 		
-		<p><label><b>Questão: </b><label><select onchange="getQuestao();" id="list_questoes"></select></p>
+		<p><label><b>Questão: </b><label><select onchange="getQuestao();" id="list_questoes" name="questao_escolhida"></select></p>
 
 		<p><label class="left"><b>Texto: </b></label><textarea class="clear" id="questao_descricao" name="questao_descricao" rows="6" cols="50" maxlength="500" ></textarea></p>
 		
-		<p><button class="clear" onclick="editQuestao();" type="submit" name="editar_questao" >Alterar</button>  <button class="clear" onclick="voltarHistory();" type="submit" name="voltar_pagina">Voltar</button></p>
+		<p><button class="clear" onclick="editQuestao();" type="submit" id="editar_questao" name="editar_questao" >Alterar</button>  <button class="clear" onclick="voltarHistory();" type="submit" name="voltar_pagina">Voltar</button></p>
 	
 </div>
 
