@@ -13,13 +13,14 @@ $(document).ready(function()
 
 	/* Begin Register function */
 		// Applying masks
+		/*
 		$("#data_nasc").mask("99/99/9999");
-		$("#tel_princ").mask("(99) 99999999?9");
-		$("#tel_op").mask("(99) 99999999?9");
+		$("#tel_princ").mask("(99)99999999?9");
+		$("#tel_op").mask("(99)99999999?9");
 		$("#cnpj").mask("99.999.999/9999-99");
 		$("#rg").mask("99.999.999-9");
 		$("#cpf").mask("999.999.999-99");
-
+		*/
 
 		$("#rg").hide();
 		$("#cpf").hide();
@@ -346,6 +347,75 @@ function hideEditUser()
 		if (document.getElementById('nota1').value == '' || document.getElementById('nota1').value == 0 || document.getElementById('nota2').value == '' || document.getElementById('nota2').value == 0 || document.getElementById('nota3').value == '' || document.getElementById('nota3').value == 0 ||document.getElementById('nota4').value == '' || document.getElementById('nota4').value == 0 || document.getElementById('nota5').value == '' || document.getElementById('nota5').value == 0) 
 		{
 			alert("Por favor, avalie todas as questões");
+		}
+		else 
+		{
+
+			$.post("/php/send_evaluation.php",
+			{
+					a_idoperadora: $('#idoperadora').val(),
+					a_nomeitem: $('#nomeitem').val(),
+					a_comentario: $('#comentario').val(),
+					a_iditem: $('#iditem').val(),
+					nota1: $('#nota1').val(),
+					nota2: $('#nota2').val(),
+					nota3: $('#nota3').val(),
+					nota4: $('#nota4').val(),
+					nota5: $('#nota5').val(),
+					q1: $('#questao_1').val(),
+					q2: $('#questao_2').val(),
+					q3: $('#questao_3').val(),
+					q4: $('#questao_4').val(),
+					q5: $('#questao_5').val()
+			}, function(data) {
+			
+				if (data == "erro")
+				{
+					alert("Os dados estão iguais !\nCaso queira atualizar seus dados modifique o formulário.");
+				}
+				else if (data == "sucesso")
+				{
+					alert("Os dados foram alterados com sucesso.");
+				}
+			});
+
+			/*if (document.getElementById('comentario').value != '')
+			{
+				$.post("/php/send_evaluation.php",
+				{
+					idoperadora: $('#idoperadora').val(),
+					a_nomeitem: $('#nomeitem').val(),
+					nota1: $('#nota1').val(),
+					nota2: $('#nota2').val(),
+					nota3: $('#nota3').val(),
+					nota4: $('#nota4').val(),
+					nota5: $('#nota5').val(),
+					questao1: $('#questao1').val(),
+					questao2: $('#questao2').val(),
+					questao3: $('#questao3').val(),
+					questao4: $('#questao4').val(),
+					questao5: $('#questao5').val()
+				}, function(data) 
+				{
+					if (data == "erro")
+						{
+							alert("Erro no registro da realização de avaliação");
+						}
+					else if (data == "sucesso")
+						{
+							alert("Avaliação enviada");
+						}
+				});
+				alert("teste envio avaliação");
+			}	
+			else
+			{
+				$.post("/php/send_evaluation.php",
+				{
+				comentario: $('comentario').val(),
+				
+				}, function(data) {});
+			}*/
 		}
 	}
 

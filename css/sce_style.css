@@ -302,6 +302,11 @@ footer
 	float: right;
 }
 
+.clear
+{
+	clear: both;
+}
+
 .main_column
 {
 	font-size: 14px;

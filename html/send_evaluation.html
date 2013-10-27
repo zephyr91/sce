@@ -49,6 +49,7 @@
 
 	<p>
 		<label class="questao">{{questao1}}</label>
+		<input type="hidden" name="q1" id="questao_1" value="{{questao1}}">
 	</p>
 	<p>
 		<div class="rateit bigstars" onclick="document.getElementById('nota1').value = $('#questao1').rateit('value')" id="questao1" data-rateit-starwidth="32" data-rateit-starheight="32">
@@ -58,6 +59,7 @@
 	
 	<p>
 		<label class="questao">{{questao2}}</label>
+		<input type="hidden" id="questao_2" name="q2" value="{{questao2}}">
 	</p>
 	<p>
 		<div class="rateit bigstars" onclick="document.getElementById('nota2').value = $('#questao2').rateit('value')" id="questao2" data-rateit-starwidth="32" data-rateit-starheight="32">
@@ -67,6 +69,7 @@
 	
 	<p>
 		<label class="questao">{{questao3}}</label>
+		<input type="hidden" id="questao_3" name="q3" value="{{questao3}}">
 	</p>
 	<p>
 		<div class="rateit bigstars" onclick="document.getElementById('nota3').value = $('#questao3').rateit('value')" id="questao3" data-rateit-starwidth="32" data-rateit-starheight="32">
@@ -76,6 +79,7 @@
 	
 	<p>
 		<label class="questao">{{questao4}}</label>
+		<input type="hidden" id="questao_4" name="q4" value="{{questao4}}">
 	</p>
 	<p>
 		<div class="rateit bigstars" onclick="document.getElementById('nota4').value = $('#questao4').rateit('value')" id="questao4" data-rateit-starwidth="32" data-rateit-starheight="32">
@@ -85,6 +89,7 @@
 	
 	<p>
 		<label class="questao">{{questao5}}</label>
+		<input type="hidden" id="questao_5" name="q5" value="{{questao5}}">
 	</p>
 	<p>
 		<div class="rateit bigstars" onclick="document.getElementById('nota5').value = $('#questao5').rateit('value')" id="questao5" data-rateit-starwidth="32" data-rateit-starheight="32">
@@ -99,6 +104,10 @@
 	<button type="submit" onclick="enviarAval()" name="enviaraval" id="enviaraval">Enviar Avaliação</button>
 	<button onclick="voltarHistory()" id="voltar">Voltar</button>
 	</div>
+	
+	<input type="hidden" name="a_idoperadora" id="idoperadora" value="{{idop}}">
+	<input type="hidden" name="a_nomeitem" id="nomeitem" value="{{nomeit}}">
+	<input type="hidden" name="a_iditem" id="iditem" value="{{idit}}">
 	
 	{% endif %}
 	

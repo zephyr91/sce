@@ -5,7 +5,9 @@ require '../bootstrap.php';
 session_start();
 
 //Open Database;
-$mysqli = new mysqli('localhost', 'core', 'core', 'sce');
+$dsn = 'mysql:dbname=sce;host=localhost';
+$dbh = new PDO($dsn, 'core', 'core');
+$dbh->exec("set names utf8");
 $email = $_SESSION['login'];
 
 // Verifica se a entrada é por método get
@@ -13,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
     $select = "select endereco,telefonePrincipal,telefoneOpcional from USUARIO where email='$email'";
 
-    $results = $mysqli->query($select);
-    $dados = $results->fetch_row();
+    $results = $dbh->query($select);
+    $dados = $results->fetch();
 
         /*
             Criando formulario para edição;
@@ -36,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $select = "select endereco,telefonePrincipal,telefoneOpcional from USUARIO where endereco='$endereco' and telefonePrincipal='$tel_princ' and telefoneOpcional='$tel_op' and email='$email';";
 
-    $validate = $mysqli->query($select);
-    $results = $validate->num_rows;
+    $validate = $dbh->query($select);
+    $results = $validate->rowCount();
     
     if ($results != 0)
     {
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     else
     {
         $update_user = "UPDATE USUARIO SET endereco='$endereco', telefonePrincipal='$tel_princ', telefoneOpcional='$tel_op' WHERE email='$email';";
-        $resultado_update = $mysqli->query($update_user);
+        $resultado_update = $dbh->query($update_user);
         echo "sucesso";
     }
 }

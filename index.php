@@ -24,9 +24,6 @@
 
 			// Authenticate user;
 			require("php/Guest_Authenticate.php");
-			
-			//Close Database;
-			require("php/CloseConnection.php");
 
 			//Check if login was successful;
 			if ($auth_status == 1)
@@ -35,8 +32,6 @@
 				require("php/OpenConnection.php");
 				//Get user type;
 				require("php/type_user.php");
-				//Close Database;
-				require("php/CloseConnection.php");
 
 				$_SESSION['datelogin']=date("M d Y H:i:s");
 				$_SESSION['nome']="$dados[0]";

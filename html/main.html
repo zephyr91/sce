@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="pt-br">
 	<head>
 
+		<meta charset="UTF-8">
+		
 		<title>
 			SCE - System Calculator from Evaluation
 		</title>
@@ -15,6 +17,7 @@
 	</head>
 
 	<body>
+	
 		<header>
 			<div id="tarja_top"></div>
 
@@ -33,24 +36,35 @@
 						<li>
 							<a class="loginbox_link" href="/?module=home"><p>Home</p></a>
 						</li>
+						{% if permission == 'A' %}
 
-						{% if tipouser == 'fisico' %}
-						<li>
-							<a class="loginbox_link" href="/?module=myeval"><p>Minhas Avaliações Recentes</p></a>
-						</li>
+
+						{% else %}
 						
-						<li>
-							<a class="loginbox_link" href="/?module=sendeval"><p>Enviar Avaliações</p></a>
-						</li>
-						{% elseif tipouser == 'juridico' %}
-						<li>
-							<a class="loginbox_link" href="/?module=myeval"><p>Minhas Avaliações Recentes</p></a>
-						</li>
+							{% if tipouser == 'fisico' %}
+
+								<li>
+									<a class="loginbox_link" href="/?module=myeval"><p>Minhas Avaliações Recentes</p></a>
+								</li>
+								
+								<li>
+									<a class="loginbox_link" href="/?module=sendeval"><p>Enviar Avaliações</p></a>
+								</li>
+							
+							{% elseif tipouser == 'juridico' %}
 						
-						<li>
-							<a class="loginbox_link" href="#"><p>Relatorios</p></a>
-						</li>
+								<li>
+									<a class="loginbox_link" href="/?module=myeval"><p>Minhas Avaliações Recentes</p></a>
+								</li>
+								
+								<li>
+									<a class="loginbox_link" href="#"><p>Relatorios</p></a>
+								</li>
+							
+							{% endif %}
+						
 						{% endif %}
+						
 						<li>
 							<a class="loginbox_link" href="/?module=panel"><p>Painel de Controle</p></a>
 						</li>
@@ -58,6 +72,7 @@
 						<li>
 							<a class="loginbox_link" href="./php/logout.php"><p>Logout</p></a>
 						</li>
+
 					</ul>
 
 					<br/>
@@ -75,8 +90,7 @@
 						</select>
 						
 						<input type="text" placeholder="Pesquisar" name="search" size="20" id="search" onkeyup="searchSuggest();" autocomplete="off" title="Campo de busca" />
-						
-						<button type="submit" name="search_button" id="searchbutton" title="Buscar" size="15" class="right">Buscar</button>
+
 					</p>
 					
 					<div id="suggests"></div>
@@ -106,15 +120,12 @@
 			<div id="main_column" class="left">
 
 				{% block control_panel %}
-
 				{% endblock control_panel %}
 
 				{% block send_evaluation %}
-
 				{% endblock send_evaluation %}
 				
 				{% block admin_manter %}
-				
 				{% endblock admin_manter %}
 
 			</div>

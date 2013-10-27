@@ -11,10 +11,11 @@
 		
 		<p><label><b>Nome: </b></label><input type="text" id="nome" name="se_nome" size="30" maxlength="150" required></p>
 		
-		<p><label><b>Descrição: </b></label><textarea id="pr_descricao" name="se_descricao" rows="10" cols="70" maxlength="500" ></p>
+		<p><label><b>Operadora: </b><label><select id="list_operadoras"></select></p>
 		
-		<p><input type="submit" name="cadastrar_servico" value="Enviar"></p>
-		<p><button onclick="voltarHistory();" type="submit" name="voltar_pagina">Voltar</button></p>
+		<p><label class="left"><b>Descrição: </b></label><textarea class="left" id="se_descricao" name="se_descricao" rows="6" cols="50" maxlength="500" ></textarea></p>
+		
+		<p><button type="submit" name="cadastrar_servico">Enviar</button>  <button onclick="voltarHistory();" type="submit" name="voltar_pagina">Voltar</button></p>
 	</form>
 	
 </div>

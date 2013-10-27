@@ -1,0 +1,51 @@
+{% extends "main.html" %}
+
+{% block admin_manter %}
+
+<div id="editarquestao" class="left main_column">
+	
+	<script>
+
+		function listQuestoes()
+		{
+			var tipo = document.getElementById('list_tipos').value;
+
+			$.get('/php/manterquestao.php?tipo=' + tipo, function(data)
+			{
+				$('#list_questoes').html(data).show();
+			});
+		}
+
+		function getQuestao()
+		{
+			var getquestao = document.getElementById('list_questoes').value;
+
+			$.get('/php/manterquestao.php?getquestao=' + getquestao, function(data)
+			{
+				$('#questao_descricao').html(data).show();
+			});
+		}
+
+		function editQuestao()
+		{
+
+		}
+
+	</script>
+
+
+	<h3 align="center">Editar uma Questão</h3>
+	
+		<br/>
+
+		<p><label><b>Tipo: </b><label><select onchange="listQuestoes();" id="list_tipos"><option>Produto</option><option>Serviço</option></select></p>
+		
+		<p><label><b>Questão: </b><label><select onchange="getQuestao();" id="list_questoes"></select></p>
+
+		<p><label class="left"><b>Texto: </b></label><textarea class="clear" id="questao_descricao" name="questao_descricao" rows="6" cols="50" maxlength="500" ></textarea></p>
+		
+		<p><button class="clear" onclick="editQuestao();" type="submit" name="editar_questao" >Alterar</button>  <button class="clear" onclick="voltarHistory();" type="submit" name="voltar_pagina">Voltar</button></p>
+	
+</div>
+
+{% endblock admin_manter %}

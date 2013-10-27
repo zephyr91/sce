@@ -6,7 +6,7 @@ switch ($module)
 {
 
     case "home":
-		echo $twig->render('main.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user']));
+		echo $twig->render('main.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'permission' => $_SESSION['permission']));
 		break;
 
     case "panel":
@@ -50,6 +50,10 @@ switch ($module)
 					
 					case "manterusuario":
 						break;
+
+					case "manterquestao":
+						echo $twig->render('manterquestao.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user']));
+						break;
 				}
 			}
 			else
@@ -67,10 +71,20 @@ switch ($module)
 		if (isset($_GET['search']))
 		{
 			$gerarFormulario = true;
+			$item = $_GET['search'];
+			require("php/send_evaluation.php");
+			
+			//echo $twig->render('send_evaluation.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'gerarFormulario' => $gerarFormulario, 'item' => $item, 'questao1' => $questoes[0][0], 'questao2' => $questoes[1][0], 'questao3' => $questoes[2][0], 'questao4' => $questoes[3][0], 'questao5' => $questoes[4][0]));
+			echo $twig->render('send_evaluation.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'gerarFormulario' => $gerarFormulario, 'item' => $item, 'questao1' => $questoes[0][0], 'questao2' => $questoes[1][0], 'questao3' => $questoes[2][0], 'questao4' => $questoes[3][0], 'questao5' => $questoes[4][0], 'nomeit' => $item_explode[0], 'idop' => $resultgetidoperadora[0], 'idit' => $resultiditem[0]));
+		}
+		//Adicionei para parar o erro de variavel nao existente antes de gerar o formulario.
+		else
+		{
+			$item="";
+			echo $twig->render('send_evaluation.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'gerarFormulario' => $gerarFormulario));
 		}
 		
-		require("php/send_evaluation.php");
-		echo $twig->render('send_evaluation.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'gerarFormulario' => $gerarFormulario, 'item' => $_GET['search'], 'questao1' => utf8_encode($questoes[0][0]), 'questao2' => utf8_encode($questoes[1][0]), 'questao3' => utf8_encode($questoes[2][0]), 'questao4' => utf8_encode($questoes[3][0]), 'questao5' => utf8_encode($questoes[4][0])));
+		
 		break;
 		
 };

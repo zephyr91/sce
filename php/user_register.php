@@ -23,6 +23,7 @@ if ($_POST['typespessoa'] == "fisica")
 	//Open Database as CORE;
 	$dsn = 'mysql:dbname=sce;host=localhost';
 	$dbh = new PDO($dsn, 'core', 'core');
+	$dbh->exec("set names utf8");
 
 	//Checking if user exists;
 	$validate_user = "select nomeUsuario,email,senha,tipoAcesso from USUARIO where email='$email';";
@@ -46,9 +47,6 @@ if ($_POST['typespessoa'] == "fisica")
 		$resultado_type_user = $dbh->query($insert_type_user);
 	}
 
-	//Close Connection;
-	require("php/CloseConnection.php");
-
 }
 
 // User Juridico;
@@ -71,6 +69,7 @@ else
 	//Open Database as CORE;
 	$dsn = 'mysql:dbname=sce;host=localhost';
 	$dbh = new PDO($dsn, 'core', 'core');
+	$dbh->exec("set names utf8");
 
 	//Checking if user exists;
 	$validate_user = "select nomeUsuario,email,senha,tipoAcesso from USUARIO where email='$email';";
@@ -95,9 +94,6 @@ else
 		$insert_type_user = "insert into JURIDICO values ('$cnpj',(select idUsuario from USUARIO where nomeUsuario='$nome'));";
 		$resultado_type_user = $dbh->query($insert_type_user);
 	}
-
-	//Close Connection;
-	require("php/CloseConnection.php");
 
 }
 
