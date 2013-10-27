@@ -165,6 +165,33 @@ function hideEditUser()
 }
 
 
+function listQuestoes()
+{
+	var tipo = document.getElementById('list_tipos').value;
+
+	$.get('/php/manterquestao.php?tipo=' + tipo, function(data)
+	{
+		$('#list_questoes').html(data).show();
+	});
+}
+
+function getQuestao()
+{
+	var getquestao = document.getElementById('list_questoes').value;
+
+	$.get('/php/manterquestao.php?getquestao=' + getquestao, function(data)
+	{
+		$('#questao_descricao').html(data).show();
+	});
+}
+
+
+function editQuestao()
+{
+
+}
+
+
 /*
 	Dropdown de pesquisa de Operadoras/Produtos/Serviços
 
