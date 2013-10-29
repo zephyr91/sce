@@ -13,14 +13,14 @@ $(document).ready(function()
 
 	/* Begin Register function */
 		// Applying masks
-		/*
+		$.mask.definitions['r'] = "[X0-9]"
 		$("#data_nasc").mask("99/99/9999");
 		$("#tel_princ").mask("(99)99999999?9");
 		$("#tel_op").mask("(99)99999999?9");
 		$("#cnpj").mask("99.999.999/9999-99");
-		$("#rg").mask("99.999.999-9");
+		$("#rg").mask("99.999.999-r");
 		$("#cpf").mask("999.999.999-99");
-		*/
+		
 
 		$("#rg").hide();
 		$("#cpf").hide();
@@ -139,9 +139,6 @@ function editUserData()
 {
 	$.post("/php/edit_user.php",
 		{
-			ed_uf: $('#uf').val(),
-			ed_municipio: $('#municipio').val(),
-			ed_bairro: $('#bairro').val(),
 			ed_endereco: $('#endereco').val(),
 			ed_tel_princ: $('#tel_princ').val(),
 			ed_tel_op: $('#tel_op').val()
@@ -154,9 +151,6 @@ function editUserData()
 		else if (data == "sucesso")
 		{
 			alert("Os dados foram alterados com sucesso.");
-			$('.cp-uf').text($('#uf').val());
-			$('.cp-municipio').text($('#municipio').val());
-			$('.cp-bairro').text($('#bairro').val());
 			$('.cp-endereco').text($('#endereco').val());
 			$('.cp-tel-princ').text($('#tel_princ').val());
 			$('.cp-tel-op').text($('#tel_op').val());
@@ -433,6 +427,10 @@ function editQuestao()
 				if (data == "erro")
 				{
 					alert("Erro ao enviar a avaliação. Tente novamente.");
+				}
+				else if (data == "erro_aval_existente")
+				{
+					alert("Você já fez esta avaliação uma vez. Caso queria alterar vá em Minhas Avaliações para editá-la.");
 				}
 				else if (data == "sucesso")
 				{
