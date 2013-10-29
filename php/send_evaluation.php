@@ -98,10 +98,30 @@
 		if ($num_result == 1)
 		{
 			$tipo_item = "servico";
+
+			$validate_aval = "select count(*) as existe from AVALIACAO a, AVALIACAO_SERVICO aser, SERVICO s where a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and aser.idServico=$iditem;";
+			$result_validate = $dbh->query($validate_aval);
+			$exist = $result_validate->fetch();
+			
+			if ($exist[0] == 1)
+			{
+				echo "erro_aval_existente";
+				exit();
+			}
 		}
 		else
 		{
 			$tipo_item = "produto";
+			
+			$validate_aval = "select count(*) as existe from AVALIACAO a, AVALIACAO_PRODUTO ap, PRODUTO p where a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and ap.idProduto=$iditem;";
+			$result_validate = $dbh->query($validate_aval);
+			$exist = $result_validate->fetch();
+
+			if ($exist[0] == 1)
+			{
+				echo "erro_aval_existente";
+				exit();
+			}
 		}
 		
 		
@@ -114,46 +134,48 @@
 		{
 			if ($tipo_item == "produto")
 			{
-				$insert_aval = "insert into AVALIACAO values ('','','0','$resultidusuario[0]','$idoperadora');";
-				$validate_aval = $dbh->query($insert_aval);			
-				//como pegar o idAvaliacao pro insert abaixo se o mesmo usuario pode ter mais de uma avaliaçao da mesma operadora? o select pode trazer mais de um resultado :(
-				$insert_type_aval = "insert into AVALIACAO_PRODUTO values ((select AVALIACAO.idAvaliacao from AVALIACAO INNER JOIN PRODUTO on AVALIACAO.idUsuario='$resultidusuario[0]' and AVALIACAO.idOperadora='$idoperadora' and PRODUTO.idProduto='$iditem'),(select idProduto from PRODUTO where nomeProduto='$nomeitem' and idOperadora='$idoperadora'));";
-				$validate_type = $dbh->query($insert_type_aval);
+				$insert_aval = "insert into AVALIACAO values ('','',0,$resultidusuario[0],$idoperadora);";
+				$aval = $dbh->query($insert_aval);
+
+				$insert_type_aval = "insert into AVALIACAO_PRODUTO values ((select a.idAvaliacao from AVALIACAO a, PRODUTO p, USUARIO u where a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and p.idProduto=$iditem order by a.idAvaliacao desc limit 0, 1),(select idProduto from PRODUTO where nomeProduto='$nomeitem' and idOperadora=$idoperadora));";
+				$aval_type = $dbh->query($insert_type_aval);
 				
 				//inserts de notas	
-				$insert_nota1 = "insert into RESPOSTA values ('$nota1',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao1'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota1 = $dbh->query($insert_nota1);
-				$insert_nota2 = "insert into RESPOSTA values ('$nota2',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao2'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota2 = $dbh->query($insert_nota2);
-				$insert_nota3 = "insert into RESPOSTA values ('$nota3',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao3'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota3 = $dbh->query($insert_nota3);
-				$insert_nota4 = "insert into RESPOSTA values ('$nota4',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao4'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota4 = $dbh->query($insert_nota4);
-				$insert_nota5 = "insert into RESPOSTA values ('$nota5',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao5'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota5 = $dbh->query($insert_nota5);
+				$insert_nota1 = "insert into RESPOSTA values ('',$nota1,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao1'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota1 = $dbh->query($insert_nota1);
+				$insert_nota2 = "insert into RESPOSTA values ('',$nota2,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao2'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota2 = $dbh->query($insert_nota2);
+				$insert_nota3 = "insert into RESPOSTA values ('',$nota3,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao3'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota3 = $dbh->query($insert_nota3);
+				$insert_nota4 = "insert into RESPOSTA values ('',$nota4,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao4'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota4 = $dbh->query($insert_nota4);
+				$insert_nota5 = "insert into RESPOSTA values ('',$nota5,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao5'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota5 = $dbh->query($insert_nota5);
+
+				echo "sucesso";
 			
 			}
 			
 			elseif ($tipo_item == "servico")
 			{
-				$insert_aval = "insert into AVALIACAO values ('','','0','$resultidusuario[0]','$idoperadora');";
-				$validate_aval = $dbh->query($insert_aval);			
+				$insert_aval = "insert into AVALIACAO values ('','',0,$resultidusuario[0],$idoperadora);";
+				$aval = $dbh->query($insert_aval);			
 				$insert_type_aval = "insert into AVALIACAO_SERVICO values ((select AVALIACAO.idAvaliacao from AVALIACAO INNER JOIN SERVICO on AVALIACAO.idUsuario='$resultidusuario[0]' and AVALIACAO.idOperadora='$idoperadora' and SERVICO.idServico='$iditem'),(select idServico from SERVICO where nomeServico='$nomeitem' and idOperadora='$idoperadora'));";
-				$validate_type = $dbh->query($insert_type_aval);
+				$aval_type = $dbh->query($insert_type_aval);
 
 				//inserts de notas
-				$insert_nota1 = "insert into RESPOSTA values ('$nota1',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao1'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota1 = $dbh->query($insert_nota1);
-				$insert_nota2 = "insert into RESPOSTA values ('$nota2',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao2'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota2 = $dbh->query($insert_nota2);
-				$insert_nota3 = "insert into RESPOSTA values ('$nota3',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao3'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota3 = $dbh->query($insert_nota3);
-				$insert_nota4 = "insert into RESPOSTA values ('$nota4',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao4'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota4 = $dbh->query($insert_nota4);
-				$insert_nota5 = "insert into RESPOSTA values ('$nota5',$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao5'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
-				$validatenota5 = $dbh->query($insert_nota5);
+				$insert_nota1 = "insert into RESPOSTA values ('',$nota1,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao1'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota1 = $dbh->query($insert_nota1);
+				$insert_nota2 = "insert into RESPOSTA values ('',$nota2,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao2'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota2 = $dbh->query($insert_nota2);
+				$insert_nota3 = "insert into RESPOSTA values ('',$nota3,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao3'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota3 = $dbh->query($insert_nota3);
+				$insert_nota4 = "insert into RESPOSTA values ('',$nota4,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao4'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota4 = $dbh->query($insert_nota4);
+				$insert_nota5 = "insert into RESPOSTA values ('',$nota5,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao5'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0]));";
+				$aval_nota5 = $dbh->query($insert_nota5);
 			
-			
+				echo "sucesso";
 			}
 		}
 	}
