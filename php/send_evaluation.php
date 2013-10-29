@@ -3,7 +3,7 @@
 
 	//Open Database;
 	$dsn = 'mysql:dbname=sce;host=localhost';
-	$dbh = new PDO($dsn, 'guest', 'guest');
+	$dbh = new PDO($dsn, 'core', 'core');
 	$dbh->exec("set names utf8");
 	session_start();
 	$email = $_SESSION['login'];
@@ -90,8 +90,6 @@
 		$questao3=$_POST['q3'];
 		$questao4=$_POST['q4'];
 		$questao5=$_POST['q5'];
-		var_dump($_POST);
-		exit;
 		
 		$select_servico = "select nomeServico from SERVICO where nomeServico='$nomeitem' and idOperadora='$idoperadora'";
 		$results = $dbh->query($select_servico);
@@ -111,6 +109,7 @@
 		{
 			//se tiver algum comentario, passar pro administrador e mandar mensagem pro usuario de q a avaliaçao sera auditada para dps ser enviada
 		}
+		
 		else
 		{
 			if ($tipo_item == "produto")
@@ -134,6 +133,7 @@
 				$validatenota5 = $dbh->query($insert_nota5);
 			
 			}
+			
 			elseif ($tipo_item == "servico")
 			{
 				$insert_aval = "insert into AVALIACAO values ('','','0','$resultidusuario[0]','$idoperadora');";

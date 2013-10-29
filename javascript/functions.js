@@ -402,6 +402,7 @@ function editQuestao()
 		{
 			alert("Por favor, avalie todas as questões");
 		}
+		
 		else 
 		{
 
@@ -425,51 +426,17 @@ function editQuestao()
 			
 				if (data == "erro")
 				{
-					alert("Os dados estão iguais !\nCaso queira atualizar seus dados modifique o formulário.");
+					alert("Erro ao enviar a avaliação. Tente novamente.");
+				}
+				else if (data == "erro_aval_existente")
+				{
+					alert("Você já fez esta avaliação uma vez. Caso queria alterar vá em Minhas Avaliações para editá-la.");
 				}
 				else if (data == "sucesso")
 				{
-					alert("Os dados foram alterados com sucesso.");
+					alert("Avaliação enviada com sucesso.");
 				}
 			});
-
-			/*if (document.getElementById('comentario').value != '')
-			{
-				$.post("/php/send_evaluation.php",
-				{
-					idoperadora: $('#idoperadora').val(),
-					a_nomeitem: $('#nomeitem').val(),
-					nota1: $('#nota1').val(),
-					nota2: $('#nota2').val(),
-					nota3: $('#nota3').val(),
-					nota4: $('#nota4').val(),
-					nota5: $('#nota5').val(),
-					questao1: $('#questao1').val(),
-					questao2: $('#questao2').val(),
-					questao3: $('#questao3').val(),
-					questao4: $('#questao4').val(),
-					questao5: $('#questao5').val()
-				}, function(data) 
-				{
-					if (data == "erro")
-						{
-							alert("Erro no registro da realização de avaliação");
-						}
-					else if (data == "sucesso")
-						{
-							alert("Avaliação enviada");
-						}
-				});
-				alert("teste envio avaliação");
-			}	
-			else
-			{
-				$.post("/php/send_evaluation.php",
-				{
-				comentario: $('comentario').val(),
-				
-				}, function(data) {});
-			}*/
 		}
 	}
 

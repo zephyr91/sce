@@ -9,6 +9,9 @@ if ($_POST['typespessoa'] == "fisica")
 	$senha=hash('sha256', $_POST['tr_senha']);
 	$data=$_POST['tr_datanascimento'];
 	$email=$_POST['tr_email'];
+	$uf=$_POST['tr_uf'];
+	$municipio=$_POST['tr_municipio'];
+	$bairro=$_POST['tr_bairro'];
 	$endereco=$_POST['tr_endereco'];
 	$tel_princ=$_POST['tr_tel_princ'];
 	$tel_op=$_POST['tr_tel_op'];
@@ -41,7 +44,7 @@ if ($_POST['typespessoa'] == "fisica")
 	//If no, register user and return to index.html;
 	else
 	{
-		$insert_user = "insert into USUARIO values ('','$nome','$date_final','$email','$senha','$endereco','$tel_princ','U','$tel_op');";
+		$insert_user = "insert into USUARIO values ('','$nome','$date_final','$email','$senha','$uf','$municipio','$bairro','$endereco','$tel_princ','U','$tel_op');";
 		$resultado_user = $dbh->query($insert_user);
 		$insert_type_user = "insert into CONSUMIDOR values ('$cpf','$rg','$sexo',(select idUsuario from USUARIO where nomeUsuario='$nome'));";
 		$resultado_type_user = $dbh->query($insert_type_user);
@@ -57,6 +60,9 @@ else
 	$senha=hash('sha256', $_POST['tr_senha']);
 	$data=$_POST['tr_datanascimento'];
 	$email=$_POST['tr_email'];
+	$uf=$_POST['tr_uf'];
+	$municipio=$_POST['tr_municipio'];
+	$bairro=$_POST['tr_bairro'];
 	$endereco=$_POST['tr_endereco'];
 	$tel_princ=$_POST['tr_tel_princ'];
 	$tel_op=$_POST['tr_tel_op'];
@@ -88,7 +94,7 @@ else
 	else
 	{
 		//Insert User;
-		$insert_user = "insert into USUARIO values ('','$nome','$date_final','$email','$senha','$endereco','$tel_princ','U','$tel_op');";
+		$insert_user = "insert into USUARIO values ('','$nome','$date_final','$email','$senha','$uf','$municipio','$bairro','$endereco','$tel_princ','U','$tel_op');";
 		$resultado_user = $dbh->query($insert_user);
 		//Insert User Juridico;
 		$insert_type_user = "insert into JURIDICO values ('$cnpj',(select idUsuario from USUARIO where nomeUsuario='$nome'));";

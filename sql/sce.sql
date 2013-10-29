@@ -1,4 +1,4 @@
-set lc_time_names = 'pt_BR';
+﻿set lc_time_names = 'pt_BR';
 
 CREATE TABLE USUARIO
 (  idUsuario         INTEGER NOT NULL AUTO_INCREMENT,
@@ -6,6 +6,9 @@ CREATE TABLE USUARIO
   dataNascimento    DATE NOT NULL ,
   email             VARCHAR (100) NOT NULL ,
   senha             CHAR (64) NOT NULL ,
+  unidadeFederativa CHAR (2) NOT NULL ,
+  municipio 		VARCHAR (50) NOT NULL ,
+  bairro 			VARCHAR (50) NOT NULL ,
   endereco          VARCHAR (100) NOT NULL ,
   telefonePrincipal CHAR (11) NOT NULL ,
   tipoAcesso        CHAR (1) NOT NULL ,
@@ -148,7 +151,7 @@ CREATE TABLE RESPOSTA
   FOREIGN KEY ( idAvaliacao ) REFERENCES AVALIACAO ( idAvaliacao ) ,
   FOREIGN KEY ( idEstruturaQuestao ) REFERENCES ESTRUTURA_QUESTAO ( idEstruturaQuestao ) ,
   FOREIGN KEY ( idUsuario ) REFERENCES USUARIO ( idUsuario ) ,
-  PRIMARY KEY (idAvaliacao, idEstruturaQuestao, idUsuario)
+  PRIMARY KEY (idAvaliacao, idUsuario)
 )DEFAULT CHARSET=utf8;
 
 
@@ -186,3 +189,6 @@ ALTER TABLE PREMIO AUTO_INCREMENT=1;
 ALTER TABLE AVALIACAO AUTO_INCREMENT=1;
 ALTER TABLE USUARIO AUTO_INCREMENT=1;
 ALTER TABLE OPERADORA AUTO_INCREMENT=1;
+ALTER TABLE USUARIO ADD COLUMN unidadeFederativa CHAR (2) NOT NULL AFTER senha;
+ALTER TABLE USUARIO ADD COLUMN municipio VARCHAR (50) NOT NULL AFTER unidadeFederativa;
+ALTER TABLE USUARIO ADD COLUMN bairro VARCHAR (50) NOT NULL AFTER municipio;

@@ -38,23 +38,23 @@ insert into SORTEIO values  ('','Sorteio da Sorte Maluca','7',current_timestamp,
 insert into SORTEIO values  ('','Sorteio da Sorte Boa','5',current_timestamp,current_timestamp + INTERVAL 100 DAY,'');
 
 
-insert into USUARIO values ('','David Henrique Langbajn','1991/01/21','david@sce.com.br','07d046d5fac12b3f82daf5035b9aae86db5adc8275ebfbf05ec83005a4a8ba3e','Rua Chora Menino 298','11998216420','A','');
-insert into USUARIO values ('','Marcus Vinicius Caldeira Olivares','1990/11/23','marcus@sce.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Copacabana','11967070617','A','');
-insert into USUARIO values ('','Camila Alves Sousa','1980/02/15','camila@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Aluísio nº 574','11954756612','U','');
-insert into USUARIO values ('','João Pedro Ferreira','1976/04/02','joao@uol.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Frei João nº 154','11947852114','U','');
-insert into USUARIO values ('','Thiago Maurício dos Santos','19821/06/27','thi221@hotmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Conde de Barão nº 112 AP 48','11992456887','U','');
-insert into USUARIO values ('','Telefonica do Brasil','1968/04/10','jonas@telefonica.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Aluísio nº 574','11954756612','U','');
-insert into USUARIO values ('','OI Operadora do Brasil','2000/05/10','mario@oi.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Frei João nº 154','11947852114','U','');
-insert into USUARIO values ('','CLARO Operadora do Brasil','1970/09/10','claro@claro.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Conde de Barão nº 112 AP 48','11992456887','U','');
-insert into USUARIO values ('','Empresa X LTDA','1975/09/10','x@x.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Conde de Mauá nº 1120','11992456887','U','');
-insert into USUARIO values ('','Tamires Rodrigues Paiva','1987/02/15','tamires@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Vergueiro nº 574','11954747612','U','');
-insert into USUARIO values ('','Fernando Rodrigues Paiva','1985/02/20','fernando@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Vergueiro nº 574','1195474801','U','');
-insert into USUARIO values ('','José de Sherlock Ramos','1990/07/27','jose@hotmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Hawhaw nº 287','11982747612','U','');
-insert into USUARIO values ('','Jorge Luiz','1992/10/19','horhe@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Macabea nº 246','11954747617','U','');
-insert into USUARIO values ('','Luiz Miguel','1990/01/01','miguel@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Macabea nº 246','11954747618','U','');
-insert into USUARIO values ('','Mariana Valentino','1989/12/13','marii@hotmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua do Horto nº 512','11952487612','U','');
-insert into USUARIO values ('','Empresa Y LTDA','1975/09/10','y@y.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Paraíso nº 648','11992434787','U','');
-insert into USUARIO values ('','Telefon & CIA','1982/04/10','adm@telefon.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','Rua Paraíso nº 104','11992434614','U','');
+insert into USUARIO values ('','David Henrique Langbajn','1991/01/21','david@sce.com.br','07d046d5fac12b3f82daf5035b9aae86db5adc8275ebfbf05ec83005a4a8ba3e','SP','São Paulo','Perdizes','Rua Chora Menino 298','11998216420','A','');
+insert into USUARIO values ('','Marcus Vinicius Caldeira Olivares','1990/11/23','marcus@sce.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Santa Teresinha','Rua Copacabana','11967070617','A','');
+insert into USUARIO values ('','Camila Alves Sousa','1980/02/15','camila@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Itaim Bibi','Rua Aluísio nº 574','11954756612','U','');
+insert into USUARIO values ('','João Pedro Ferreira','1976/04/02','joao@uol.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Ipiranga','Rua Frei João nº 154','11947852114','U','');
+insert into USUARIO values ('','Thiago Maurício dos Santos','19821/06/27','thi221@hotmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','RJ','Rio de Janeiro','Barra da Tijuca','Rua Conde de Barão nº 112 AP 48','11992456887','U','');
+insert into USUARIO values ('','Telefonica do Brasil','1968/04/10','jonas@telefonica.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','RJ','Rio de Janeiro','Niterói','Rua Aluísio nº 574','11954756612','U','');
+insert into USUARIO values ('','OI Operadora do Brasil','2000/05/10','mario@oi.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Ipiranga','Rua Frei João nº 154','11947852114','U','');
+insert into USUARIO values ('','CLARO Operadora do Brasil','1970/09/10','claro@claro.com.br','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','RJ','Rio de Janeiro','Barra da Tijuca','Rua Conde de Barão nº 112 AP 48','11992456887','U','');
+insert into USUARIO values ('','Empresa X LTDA','1975/09/10','x@x.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','RS','Porto Alegre','Portinho','Rua Conde de Mauá nº 1120','11992456887','U','');
+insert into USUARIO values ('','Tamires Rodrigues Paiva','1987/02/15','tamires@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Vergueiro','Rua Vergueiro nº 574','11954747612','U','');
+insert into USUARIO values ('','Fernando Rodrigues Paiva','1985/02/20','fernando@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Vergueiro','Rua Vergueiro nº 574','1195474801','U','');
+insert into USUARIO values ('','José de Sherlock Ramos','1990/07/27','jose@hotmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','CE','Fortaleza','Itamar','Rua Hawhaw nº 287','11982747612','U','');
+insert into USUARIO values ('','Jorge Luiz','1992/10/19','horhe@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','BA','Salvador','Pituba','Rua Macabea nº 246','11954747617','U','');
+insert into USUARIO values ('','Luiz Miguel','1990/01/01','miguel@gmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','BA','Salvador','Pituba','Rua Macabea nº 246','11954747618','U','');
+insert into USUARIO values ('','Mariana Valentino','1989/12/13','marii@hotmail.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SC','Florianópolis','Campeche','Rua do Horto nº 512','11952487612','U','');
+insert into USUARIO values ('','Empresa Y LTDA','1975/09/10','y@y.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Paraíso','Rua Paraíso nº 648','11992434787','U','');
+insert into USUARIO values ('','Telefon & CIA','1982/04/10','adm@telefon.com','d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Paraíso','Rua Paraíso nº 104','11992434614','U','');
 
 
 

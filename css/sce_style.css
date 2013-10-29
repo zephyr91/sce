@@ -2,18 +2,18 @@ body
 {
 	margin: 0 auto;
 	padding: 0;
+	margin-top: 10px;
 	line-height: 1.5em;
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 11px;
-	color: #333333;
 	width: 75%;
-	background-image: url('/images/tweed.png');
+	background-image: url('/images/fabric_plaid.png');
 }
 
 
 a:link, a:visited
 {
-	color: white;
+	color: black;
 	text-decoration: none;
 }
 
@@ -28,7 +28,7 @@ p
 	padding: 0px;
 }
 
-#zz
+#enviar_inputs
 {
 	padding-left: 400px;
 }
@@ -73,119 +73,122 @@ h4
 
 /* Begin Top panel */
 
-#tarja_top
-{
-	border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
-}
+		#tarja_top
+		{
+			border-top-right-radius: 20px;
+			border-top-left-radius: 20px;
+		}
 
-#tarja_bottom
-{
+		#tarja_bottom
+		{
 
-}
+		}
 
-#top_panel
-{
-	background: url('/images/sce_claro2.png') no-repeat center;
-	background-size: 70%;
-	width: 100%;
-	height: 180px;
-	margin: 0px;
-	color: white;
-}
+		#top_panel
+		{
+			background: url('/images/sce_claro.png') no-repeat center;
+			background-size: 70%;
+			background-color: #DBD7D7;
+			width: 100%;
+			height: 180px;
+			margin: 0px;
+			color: black;
+		}
 
-#top_panel select, input, button
-{
-	color: white;
-	background-color: #333
-}
+		#top_panel select, input, button
+		{
+			color: black;
+			background-color: #A89F9F;
+		}
 
-#searchbox
-{
-	top:  0;
-	margin: 0;
-}
+		#searchbox
+		{
+			top: 0;
+			margin: 0;
+		}
 
-#searchbox p
-{
-	font-size: 15px;
-}
+		#searchbox p
+		{
+			font-size: 15px;
+		}
 
-#searchbox input, button
-{
-	margin-top: 15px;
-	margin-right: 5px;
-	border-radius: 12px;
-	border-color: white;
-}
+		#searchbox input, select
+		{
+			margin-top: 15px;
+			margin-right: 5px;
+			border-radius: 12px;
+			border-color: black;
+		}
 
-#loginbox
-{
-	top:0;
-	margin: 0;
-}
+		#loginbox
+		{
+			top:0;
+			margin: 0;
+		}
 
-.loginbox_link
-{
-	display: inline-block;
-}
+		.loginbox_link
+		{
+			display: inline-block;
+		}
 
-#loginbox p
-{
-	font-size: 15px;
-	color: white;
-}
+		#loginbox p
+		{
+			font-size: 15px;
+			color: black;
+		}
 
-#loginbox .bemvindo p
-{
-	font-family: Arial;
-	font-size: 20px;
-}
+		#loginbox .bemvindo p
+		{
+			font-family: Arial;
+			font-size: 20px;
+		}
 
-#loginbox input
-{
-	/*border-radius: 5px;*/
-}
+		#loginbox a:hover
+		{
+			padding-left: 4px;
+			font-weight: bold;
+		}
 
- #loginbox ul
-{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+		 #loginbox ul
+		{
+		    margin: 0;
+		    padding: 0;
+		    padding-left: 3px;
+		    list-style: none;
+		}
 
-#login_dropdown
-{
-	-moz-box-shadow: 1px 0 0 none;
-	-webkit-box-shadow: 1px 0 0 none;
-}
+		#login_dropdown
+		{
+			-moz-box-shadow: 1px 0 0 none;
+			-webkit-box-shadow: 1px 0 0 none;
+		}
 
-#login-click
-{
-	display: inline-block;
-	*display: inline;
-	*zoom: 1;
-	text-decoration: none;
-}
+		#login-click
+		{
+			display: inline-block;
+			*display: inline;
+			*zoom: 1;
+			text-decoration: none;
+		}
 
-#login-content
-{
-	display: none;
-	z-index: 999;
-	background: none;
-	padding: 15px;
-	-moz-box-shadow: 0 0 0em;
-	-webkit-box-shadow: 0 0 0em;
-	box-shadow: 0 0 0em;
-	-moz-border-radius: 0px 0 3px 3px;
-	-webkit-border-radius: 0px 0 3px 3px;
-	border-radius: 0 0 3px 3px;
-}
+		#login-content
+		{
+			display: none;
+			z-index: 999;
+			background: none;
+			padding: 15px;
+			-moz-box-shadow: 0 0 0em;
+			-webkit-box-shadow: 0 0 0em;
+			box-shadow: 0 0 0em;
+			-moz-border-radius: 0px 0 3px 3px;
+			-webkit-border-radius: 0px 0 3px 3px;
+			border-radius: 0 0 3px 3px;
+		}
 
-#login-content input, button
-{
-	border-radius: 5px;
-}
+		#login-content input, button
+		{
+			border-radius: 5px;
+		}
 
 /* End Top Panel*/
 
@@ -194,47 +197,47 @@ h4
 
 /* Begin Menu Style */
 
-#top_menu
-{
-	float: left;
-	width: 100%;
-	height: 30px;
-	background: #333  repeat-x;
-	border-bottom-right-radius: 20px;
-	border-bottom-left-radius: 20px;
-}
+		#top_menu
+		{
+			float: left;
+			width: 100%;
+			height: 30px;
+			background: #333  repeat-x;
+			border-bottom-right-radius: 20px;
+			border-bottom-left-radius: 20px;
+		}
 
-#top_menu ul
-{
+		#top_menu ul
+		{
 
-	float: left;
-	width: 100%;
-	margin: 0;
-	padding: 7px 0 0 0;
-	list-style: none;
-}
+			float: left;
+			width: 100%;
+			margin: 0;
+			padding: 7px 0 0 0;
+			list-style: none;
+		}
 
-#top_menu ul li
-{
-	display: inline;
-}
+		#top_menu ul li
+		{
+			display: inline;
+		}
 
-#top_menu ul li a
-{
-	float: left;
-	padding: 0 25px;
-	font-size: 12px;
-	font-weight: bold;
-	text-align: center;
-	text-decoration: none;
-	color: #FFFFFF;
-	border-right: 1px solid #FFFFFF;
-}
+		#top_menu ul li a
+		{
+			float: left;
+			padding: 0 25px;
+			font-size: 12px;
+			font-weight: bold;
+			text-align: center;
+			text-decoration: none;
+			color: #FFFFFF;
+			border-right: 1px solid #FFFFFF;
+		}
 
-#top_menu li a:hover
-{
-	color: #4d4646;
-}
+		#top_menu li a:hover
+		{
+			color: #4d4646;
+		}
 
 /* End Menu Style */
 
@@ -244,25 +247,11 @@ h4
 	margin-top: 25px;
 	width: 100%;
 	height: 600px;
-	background: #BFBABA;
+	background: #DBD7D7;
 	border-top-right-radius: 20px;
 	border-top-left-radius: 20px;
 }
 
-#left_column
-{
-	width: 50%;
-	height: 700px;
-	background: #BFBABA;
-
-}
-
-#right_column
-{
-	width: 50%;
-	height: 700px;
-	background: #BFBABA;
-}
 
 #tarja_top
 {
@@ -325,8 +314,8 @@ footer
 
 .main_column input,select
 {
-	color: white;
-	background-color: #333;
+	color: black;
+	background-color: #A89F9F;
 	border-radius: 12px;
 	border-color: white;
 }
@@ -345,18 +334,20 @@ footer
 
 .suggest_link
 {
-	color: white;
+	color: black;
 	font-size: 15;
-	background-color: #333;
+	display: block;
+	background-color: #A89F9F;
 	border: 1px solid #000000;
 	padding: 2px 6px 2px 6px;
 }
 
 .suggest_link_over
 {
-	color: #333;
+	color: white;
 	font-size: 15;
-	background-color: #300;
+	display: block;
+	background-color: #333;
 	border: 1px solid #000000;
 	padding: 2px 6px 2px 6px;
 }
@@ -367,7 +358,7 @@ footer
 	position: absolute;
 	font-size: 15;
 	color: white;
-	background-color: #333;
+	background-color: #A89F9F;
 	width: 20%;
 	height: 180px;
 	overflow-y: scroll;
@@ -380,7 +371,7 @@ footer
 	position: absolute;
 	font-size: 15;
 	color: white;
-	background-color: #333;
+	background-color: #A89F9F;
 	width: 20%;
 	height: 200px;
 	overflow-y: scroll;
@@ -419,7 +410,7 @@ footer
 {
 	font-family: sans-serif;
 	font-weight: bold;
-	font-size: 14px;	
+	font-size: 14px;
 }
 
 /*#user_form
