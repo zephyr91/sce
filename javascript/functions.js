@@ -13,14 +13,14 @@ $(document).ready(function()
 
 	/* Begin Register function */
 		// Applying masks
-		/*
+		$.mask.definitions['r'] = "[X0-9]"
 		$("#data_nasc").mask("99/99/9999");
 		$("#tel_princ").mask("(99)99999999?9");
 		$("#tel_op").mask("(99)99999999?9");
 		$("#cnpj").mask("99.999.999/9999-99");
-		$("#rg").mask("99.999.999-9");
+		$("#rg").mask("99.999.999-r");
 		$("#cpf").mask("999.999.999-99");
-		*/
+		
 
 		$("#rg").hide();
 		$("#cpf").hide();

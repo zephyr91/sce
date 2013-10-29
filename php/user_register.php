@@ -13,10 +13,10 @@ if ($_POST['typespessoa'] == "fisica")
 	$municipio=$_POST['tr_municipio'];
 	$bairro=$_POST['tr_bairro'];
 	$endereco=$_POST['tr_endereco'];
-	$tel_princ=$_POST['tr_tel_princ'];
-	$tel_op=$_POST['tr_tel_op'];
-	$rg=$_POST['tr_rg'];
-	$cpf=$_POST['tr_cpf'];
+	$tel_princ=preg_replace("/[^0-9]/", "",$_POST['tr_tel_princ']);
+	$tel_op=preg_replace("/[^0-9]/", "",$_POST['tr_tel_op']);
+	$rg= preg_replace("/[^0-9X]/", "",$_POST['tr_rg']);
+	$cpf=preg_replace("/[^0-9]/", "",$_POST['tr_cpf']);
 	$sexo=$_POST['tr_sexo'];
 
 	//Formating date;
