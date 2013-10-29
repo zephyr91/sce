@@ -9,7 +9,7 @@
 	{
 	
 		//obtençao de informaçoes do usuario fisico 
-		$select_fisico = "select USUARIO.dataNascimento, USUARIO.email, USUARIO.endereco, USUARIO.telefonePrincipal, USUARIO.telefoneOpcional, CONSUMIDOR.cpf, CONSUMIDOR.rg, CONSUMIDOR.sexo from USUARIO INNER JOIN CONSUMIDOR ON USUARIO.email ='$email' AND USUARIO.idUsuario = CONSUMIDOR.idUsuario;";
+		$select_fisico = "select USUARIO.dataNascimento, USUARIO.email, USUARIO.unidadeFederativa, USUARIO.municipio, USUARIO.bairro, USUARIO.endereco, USUARIO.telefonePrincipal, USUARIO.telefoneOpcional, CONSUMIDOR.cpf, CONSUMIDOR.rg, CONSUMIDOR.sexo from USUARIO INNER JOIN CONSUMIDOR ON USUARIO.email ='$email' AND USUARIO.idUsuario = CONSUMIDOR.idUsuario;";
 
 
 		$results_fisico = $dbh->query($select_fisico);
@@ -26,7 +26,7 @@
 	{
 	
 		//obtençao de informaçoes do usuario juridico
-		$select_juridico = "select USUARIO.dataNascimento, USUARIO.email, USUARIO.endereco, USUARIO.telefonePrincipal, USUARIO.telefoneOpcional, JURIDICO.cnpj from USUARIO INNER JOIN JURIDICO ON USUARIO.email='$email' AND USUARIO.idUsuario = JURIDICO.idUsuario;";
+		$select_juridico = "select USUARIO.dataNascimento, USUARIO.email, USUARIO.unidadeFederativa, USUARIO.municipio, USUARIO.bairro, USUARIO.endereco, USUARIO.telefonePrincipal, USUARIO.telefoneOpcional, JURIDICO.cnpj from USUARIO INNER JOIN JURIDICO ON USUARIO.email='$email' AND USUARIO.idUsuario = JURIDICO.idUsuario;";
 		
 		
 		$results_juridico = $dbh->query($select_juridico);

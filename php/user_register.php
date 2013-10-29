@@ -64,9 +64,9 @@ else
 	$municipio=$_POST['tr_municipio'];
 	$bairro=$_POST['tr_bairro'];
 	$endereco=$_POST['tr_endereco'];
-	$tel_princ=$_POST['tr_tel_princ'];
-	$tel_op=$_POST['tr_tel_op'];
-	$cnpj=$_POST['tr_cnpj'];
+	$tel_princ=preg_replace("/[^0-9]/", "",$_POST['tr_tel_princ']);
+	$tel_op=preg_replace("/[^0-9]/", "",$_POST['tr_tel_op']);
+	$cnpj=preg_replace("/[^0-9]/", "",$_POST['tr_cnpj']);
 
 	//Formating date;
 	$date_formated = date_create_from_format('d/m/Y', $data);

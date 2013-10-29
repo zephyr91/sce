@@ -13,7 +13,7 @@ $email = $_SESSION['login'];
 // Verifica se a entrada é por método get
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
-    $select = "select endereco,telefonePrincipal,telefoneOpcional from USUARIO where email='$email'";
+    $select = "select endereco,telefonePrincipal,telefoneOpcional,unidadeFederativa,municipio,bairro from USUARIO where email='$email'";
 
     $results = $dbh->query($select);
     $dados = $results->fetch();
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         /*
             Criando formulario para edição;
         */
-        echo $twig->render('edit_user.html', array('endereco' => $dados[0], 'tel_principal' => $dados[1], 'tel_opcional' => $dados[2]));
+        echo $twig->render('edit_user.html', array('endereco' => $dados[0], 'tel_principal' => $dados[1], 'tel_opcional' => $dados[2], 'unidadeFederativa' => $dados[3], 'municipio' => $dados[4], 'bairro' => $dados[5]));
 
 }
 
@@ -35,8 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $endereco=$_POST['ed_endereco'];
     $tel_princ=$_POST['ed_tel_princ'];
     $tel_op=$_POST['ed_tel_op'];
+	$uf=$_POST['ed_uf'];
+	$municipio=$_POST['ed_municipio'];
+	$bairro=$_POST['ed_bairro'];
 
-    $select = "select endereco,telefonePrincipal,telefoneOpcional from USUARIO where endereco='$endereco' and telefonePrincipal='$tel_princ' and telefoneOpcional='$tel_op' and email='$email';";
+    $select = "select endereco,telefonePrincipal,telefoneOpcional,unidadeFederativa,municipio,bairro from USUARIO where endereco='$endereco' and telefonePrincipal='$tel_princ' and telefoneOpcional='$tel_op' and unidadeFederativa='$uf' and bairro='$bairro' and municipio='$municipio' and email='$email';";
 
     $validate = $dbh->query($select);
     $results = $validate->rowCount();
@@ -48,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     else
     {
-        $update_user = "UPDATE USUARIO SET endereco='$endereco', telefonePrincipal='$tel_princ', telefoneOpcional='$tel_op' WHERE email='$email';";
+        $update_user = "UPDATE USUARIO SET endereco='$endereco', telefonePrincipal='$tel_princ', telefoneOpcional='$tel_op', unidadeFederativa='$uf', municipio='$municipio', bairro='$bairro' WHERE email='$email';";
         $resultado_update = $dbh->query($update_user);
         echo "sucesso";
     }

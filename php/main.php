@@ -15,10 +15,10 @@ switch ($module)
 			require("php/control_panel.php");
 			
 			//Format Date;
-			$date_formated = date_create_from_format('Y/m/d', $dados_juridico[0]);
+			$date_formated = date_create_from_format('d/m/Y', $dados_fisico[0]);
 			$date_final = date_format($date_formated, 'd/m/Y');
 			
-			echo $twig->render('control_panel.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'dtnasc' => $dados_fisico[0], 'email' => $dados_fisico[1], 'endereco' => $dados_fisico[2], 'tel_princ' => $dados_fisico[3], 'tel_op' => $dados_fisico[4], 'cpf' => $dados_fisico[5], 'rg' => $dados_fisico[6], 'sexo' => $dados_fisico[7]));
+			echo $twig->render('control_panel.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'dtnasc' => $dados_fisico[0], 'email' => $dados_fisico[1], 'uf' => $dados_fisico[2], 'municipio' => $dados_fisico[3], 'bairro' => $dados_fisico[4], 'endereco' => $dados_fisico[5], 'tel_princ' => $dados_fisico[6], 'tel_op' => $dados_fisico[7], 'cpf' => $dados_fisico[8], 'rg' => $dados_fisico[9], 'sexo' => $dados_fisico[10]));
 		}
 		elseif ($_SESSION['tipo_user'] == "juridico" && $_SESSION['permission'] != "A")
 		{
@@ -28,7 +28,7 @@ switch ($module)
 			$date_formated = date_create_from_format('Y/m/d', $dados_juridico[0]);
 			$date_final = date_format($date_formated, 'd/m/Y');
 			
-			echo $twig->render('control_panel.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'dtnasc' => $dados_juridico[0], 'email' => $dados_juridico[1], 'endereco' => $dados_juridico[2], 'tel_princ' => $dados_juridico[3], 'tel_op' => $dados_juridico[4], 'cnpj' => $dados_juridico[5]));
+			echo $twig->render('control_panel.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'dtnasc' => $dados_juridico[0], 'email' => $dados_juridico[1], 'uf' => $dados_juridico[2], 'municipio' => $dados_juridico[3], 'bairro' => $dados_juridico[4], 'endereco' => $dados_juridico[5], 'tel_princ' => $dados_juridico[6], 'tel_op' => $dados_juridico[7], 'cnpj' => $dados_juridico[8]));
 		}
 		elseif ($_SESSION['permission'] == "A")
 		{

@@ -149,7 +149,7 @@ function editUserData()
 		
 		if (data == "erro")
 		{
-			alert("Os dados estão iguais !\nCaso queira atualizar seus dados modifique o formulário.");
+			alert("Os dados estão iguais!\nCaso queira atualizar seus dados, modifique o formulário.");
 		}
 		else if (data == "sucesso")
 		{
@@ -169,7 +169,6 @@ function hideEditUser()
 {
 	document.getElementById('edit_dados').style.display="none";
 }
-
 
 function listQuestoes()
 {

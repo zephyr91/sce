@@ -93,11 +93,13 @@ h4
 			height: 180px;
 			margin: 0px;
 			color: black;
+			border-color: black;
 		}
 
 		#top_panel select, input, button
 		{
 			color: black;
+			border-color: black;
 			background-color: #A89F9F;
 		}
 
@@ -114,6 +116,7 @@ h4
 
 		#searchbox input, select
 		{
+			color: black;
 			margin-top: 15px;
 			margin-right: 5px;
 			border-radius: 12px;
@@ -122,8 +125,10 @@ h4
 
 		#loginbox
 		{
+			color: black;
 			top:0;
 			margin: 0;
+			border-color: black;
 		}
 
 		.loginbox_link
@@ -173,6 +178,7 @@ h4
 
 		#login-content
 		{
+			color: black;
 			display: none;
 			z-index: 999;
 			background: none;
