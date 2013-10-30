@@ -139,6 +139,8 @@ function editUserData()
 {
 	$.post("/php/edit_user.php",
 		{
+			//ed_uf: $('#uf').val(/*$('#uf')*/),
+			//ed_uf: $('#uf').$("option[value='#uf']").attr('selected','selected'),
 			ed_uf: $('#uf').val(),
 			ed_municipio: $('#municipio').val(),
 			ed_bairro: $('#bairro').val(),
@@ -435,11 +437,15 @@ function editQuestao()
 				}
 				else if (data == "erro_aval_existente")
 				{
-					alert("Você já fez esta avaliação uma vez. Caso queria alterar vá em Minhas Avaliações para editá-la.");
+					alert("Você já fez esta avaliação uma vez. Caso queria alterá-la vá em \"Minhas Avaliações\".");
 				}
 				else if (data == "sucesso")
 				{
 					alert("Avaliação enviada com sucesso.");
+				}
+				else if (data == "comment")
+				{
+					alert("Avaliação enviada com sucesso, porém será auditada por administradores.");
 				}
 			});
 		}

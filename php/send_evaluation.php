@@ -128,8 +128,52 @@
 		if ($comentario != '')
 		{
 			//se tiver algum comentario, passar pro administrador e mandar mensagem pro usuario de q a avaliaçao sera auditada para dps ser enviada
+			if ($tipo_item == "produto")
+			{
+				$insert_aval = "insert into AVALIACAO values ('','$comentario',5,$resultidusuario[0],$idoperadora);";
+				$aval = $dbh->query($insert_aval);
+
+				$insert_type_aval = "insert into AVALIACAO_PRODUTO values ((select a.idAvaliacao from AVALIACAO a, PRODUTO p, USUARIO u where a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and p.idProduto=$iditem order by a.idAvaliacao desc limit 0, 1),(select idProduto from PRODUTO where nomeProduto='$nomeitem' and idOperadora=$idoperadora));";
+				$aval_type = $dbh->query($insert_type_aval);
+				
+				//inserts de notas	
+				$insert_nota1 = "insert into RESPOSTA values ('',$nota1,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao1'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota1 = $dbh->query($insert_nota1);
+				$insert_nota2 = "insert into RESPOSTA values ('',$nota2,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao2'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota2 = $dbh->query($insert_nota2);
+				$insert_nota3 = "insert into RESPOSTA values ('',$nota3,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao3'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota3 = $dbh->query($insert_nota3);
+				$insert_nota4 = "insert into RESPOSTA values ('',$nota4,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao4'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota4 = $dbh->query($insert_nota4);
+				$insert_nota5 = "insert into RESPOSTA values ('',$nota5,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao5'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota5 = $dbh->query($insert_nota5);
+
+				echo "comment";
+			
+			}
+			
+			elseif ($tipo_item == "servico")
+			{
+				$insert_aval = "insert into AVALIACAO values ('','$comentario',5,$resultidusuario[0],$idoperadora);";
+				$aval = $dbh->query($insert_aval);			
+				$insert_type_aval = "insert into AVALIACAO_SERVICO values ((select a.idAvaliacao from AVALIACAO a, SERVICO s, USUARIO u where a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and s.idServico=$iditem order by a.idAvaliacao desc limit 0, 1),(select idServico from SERVICO where nomeServico='$nomeitem' and idOperadora=$idoperadora));";
+				$aval_type = $dbh->query($insert_type_aval);
+
+				//inserts de notas
+				$insert_nota1 = "insert into RESPOSTA values ('',$nota1,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao1'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota1 = $dbh->query($insert_nota1);
+				$insert_nota2 = "insert into RESPOSTA values ('',$nota2,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao2'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota2 = $dbh->query($insert_nota2);
+				$insert_nota3 = "insert into RESPOSTA values ('',$nota3,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao3'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota3 = $dbh->query($insert_nota3);
+				$insert_nota4 = "insert into RESPOSTA values ('',$nota4,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao4'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota4 = $dbh->query($insert_nota4);
+				$insert_nota5 = "insert into RESPOSTA values ('',$nota5,$resultidusuario[0],(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao5'),(select idAvaliacao from AVALIACAO where idUsuario=$resultidusuario[0] order by idAvaliacao desc limit 0, 1));";
+				$aval_nota5 = $dbh->query($insert_nota5);
+			
+				echo "comment";
+			}
 		}
-		
 		else
 		{
 			if ($tipo_item == "produto")
@@ -180,20 +224,5 @@
 		}
 	}
 	
-	
-	/*
-	1)devemos impedir o sistema de gerar avalia?o pra algo que nao est?no banco
-	ao clicar no 'gerar avalia?o', deve ser executado um select verificando se o item pesquisado est?no banco (select em produto e servi? nos ids e num_rows = 1?).
-	caso o item nao exista, exibir um alert em javascript informando o usuario para escolher algum item da lista e nao gerar a avalia?o (if no botao?)
-	
-	2)ap? a verifica?o de existencia do item, verificar se ?um produto ou servi?, isso pode ser feito pela propria fun?o de select acima q possa setar se ?um produto caso encontre nessa tabela ou servi? na outra
-	dependendo de qual for o tipo do item, trazer as questoes inerentes a ele (select estrutura questao, ids 1 ao 5 pra produto por ex e 6 ao 10 pra servi? por ex)
-	
-	3)no bot? de enviar avalia?o, deve existir uma fun?o que verifique se todas as quest?es foram preenchidas (input type do html que armazena as notas e posteriormente passa pro php nao pode ser null)
-	semelhante ao "if" do botao de gerar avalia?o, o if desse botao impedira o usuario de enviar a avalia?o com um alert caso as questoes nao estejam preenchidas.
-	finalmente, quando todas estiverem devidamente avaliadas, 
-	?feito o(s) insert(s) -> (insert na avalia?o + avalia?o produto por exemplo e o insert das respostas (valores dos input types hidden),
-	al? de analisar o cupom do usu?io (mas creio que aqui ?um select na propria pagina de controle do usario q ser?feito posteriormente para verificar quantos cupoms ele possui))
-	*/
 	
 ?>
