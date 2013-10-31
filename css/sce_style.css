@@ -86,7 +86,7 @@ h4
 
 		#top_panel
 		{
-			background: url('/images/sce_claro.png') no-repeat center;
+			background: url('/images/saot.png') no-repeat center;
 			background-size: 70%;
 			background-color: #DBD7D7;
 			width: 100%;
@@ -100,7 +100,7 @@ h4
 		{
 			color: black;
 			border-color: black;
-			background-color: #A89F9F;
+			background-color: #4f9fc5;
 		}
 
 		#searchbox
@@ -121,6 +121,7 @@ h4
 			margin-right: 5px;
 			border-radius: 12px;
 			border-color: black;
+			background-color: #4f9fc5;
 		}
 
 		#loginbox
@@ -321,7 +322,7 @@ footer
 .main_column input,select
 {
 	color: black;
-	background-color: #A89F9F;
+	background-color: #4f9fc5;
 	border-radius: 12px;
 	border-color: white;
 }
@@ -343,7 +344,7 @@ footer
 	color: black;
 	font-size: 15;
 	display: block;
-	background-color: #A89F9F;
+	background-color: #4f9fc5;
 	border: 1px solid #000000;
 	padding: 2px 6px 2px 6px;
 }
@@ -364,7 +365,7 @@ footer
 	position: absolute;
 	font-size: 15;
 	color: white;
-	background-color: #A89F9F;
+	background-color: #4f9fc5;
 	width: 20%;
 	height: 180px;
 	overflow-y: scroll;
@@ -377,7 +378,7 @@ footer
 	position: absolute;
 	font-size: 15;
 	color: white;
-	background-color: #A89F9F;
+	background-color: #4f9fc5;
 	width: 20%;
 	height: 200px;
 	overflow-y: scroll;
