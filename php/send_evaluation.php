@@ -127,10 +127,9 @@
 		
 		if ($comentario != '')
 		{
-			//se tiver algum comentario, passar pro administrador e mandar mensagem pro usuario de q a avaliaçao sera auditada para dps ser enviada
 			if ($tipo_item == "produto")
 			{
-				$insert_aval = "insert into AVALIACAO values ('','$comentario',5,$resultidusuario[0],$idoperadora);";
+				$insert_aval = "insert into AVALIACAO values ('','$comentario',1,$resultidusuario[0],$idoperadora,'N');";
 				$aval = $dbh->query($insert_aval);
 
 				$insert_type_aval = "insert into AVALIACAO_PRODUTO values ((select a.idAvaliacao from AVALIACAO a, PRODUTO p, USUARIO u where a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and p.idProduto=$iditem order by a.idAvaliacao desc limit 0, 1),(select idProduto from PRODUTO where nomeProduto='$nomeitem' and idOperadora=$idoperadora));";
@@ -154,7 +153,7 @@
 			
 			elseif ($tipo_item == "servico")
 			{
-				$insert_aval = "insert into AVALIACAO values ('','$comentario',5,$resultidusuario[0],$idoperadora);";
+				$insert_aval = "insert into AVALIACAO values ('','$comentario',1,$resultidusuario[0],$idoperadora,'N');";
 				$aval = $dbh->query($insert_aval);			
 				$insert_type_aval = "insert into AVALIACAO_SERVICO values ((select a.idAvaliacao from AVALIACAO a, SERVICO s, USUARIO u where a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and s.idServico=$iditem order by a.idAvaliacao desc limit 0, 1),(select idServico from SERVICO where nomeServico='$nomeitem' and idOperadora=$idoperadora));";
 				$aval_type = $dbh->query($insert_type_aval);
@@ -178,7 +177,7 @@
 		{
 			if ($tipo_item == "produto")
 			{
-				$insert_aval = "insert into AVALIACAO values ('','',0,$resultidusuario[0],$idoperadora);";
+				$insert_aval = "insert into AVALIACAO values ('','',1,$resultidusuario[0],$idoperadora,'S');";
 				$aval = $dbh->query($insert_aval);
 
 				$insert_type_aval = "insert into AVALIACAO_PRODUTO values ((select a.idAvaliacao from AVALIACAO a, PRODUTO p, USUARIO u where a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and p.idProduto=$iditem order by a.idAvaliacao desc limit 0, 1),(select idProduto from PRODUTO where nomeProduto='$nomeitem' and idOperadora=$idoperadora));";
@@ -202,7 +201,7 @@
 			
 			elseif ($tipo_item == "servico")
 			{
-				$insert_aval = "insert into AVALIACAO values ('','',0,$resultidusuario[0],$idoperadora);";
+				$insert_aval = "insert into AVALIACAO values ('','',1,$resultidusuario[0],$idoperadora,'S');";
 				$aval = $dbh->query($insert_aval);			
 				$insert_type_aval = "insert into AVALIACAO_SERVICO values ((select a.idAvaliacao from AVALIACAO a, SERVICO s, USUARIO u where a.idUsuario=$resultidusuario[0] and a.idOperadora=$idoperadora and s.idServico=$iditem order by a.idAvaliacao desc limit 0, 1),(select idServico from SERVICO where nomeServico='$nomeitem' and idOperadora=$idoperadora));";
 				$aval_type = $dbh->query($insert_type_aval);
