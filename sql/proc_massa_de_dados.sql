@@ -27,14 +27,15 @@ DROP PROCEDURE IF EXISTS avaliacao_rows $$
 CREATE PROCEDURE avaliacao_rows (size INT) 
 	BEGIN
 	
-	DECLARE
-		rows INT DEFAULT 20;
-		opselected INT;
-		op1 INT DEFAULT 1;
-		op2 INT DEFAULT 4;
-		nota INT;
-		nota_i int DEFAULT 0;
-		idserv int;
+		/*rows INT DEFAULT 20; na verdade precisa verificar quantos usuários existem através de um select. o padrão é 20*/
+		DECLARE rows INT DEFAULT 21;
+		DECLARE opselected INT;
+		DECLARE op1 INT DEFAULT 1;
+		DECLARE op2 INT DEFAULT 4;
+		DECLARE nota INT;
+		DECLARE nota_i int DEFAULT 0;
+		DECLARE questao_i int DEFAULT 6;
+		DECLARE	idserv int;
 
 
 	WHILE rows < size DO
@@ -49,6 +50,10 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 
 		insert into AVALIACAO values ('','',1,rows,opselected,'S');
 		insert into AVALIACAO_SERVICO values ((select a.idAvaliacao from AVALIACAO a, SERVICO s where a.idUsuario=rows and a.idOperadora=opselected and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1),idserv);
+		
+		IF questao_i = 11 THEN
+			set questao_i = 6;
+		END IF;
 		
 		notas_loop: LOOP
 
@@ -73,7 +78,11 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 				WHEN 0.9 THEN SET nota = 5;
 			END CASE;
 
+			/*insert into RESPOSTA values ('',nota,rows,questao_i,(select idAvaliacao from AVALIACAO where idUsuario=rows order by idAvaliacao desc limit 0, 1));*/
+			insert into RESPOSTA values ('',nota,rows,questao_i,(select a.idAvaliacao from AVALIACAO a, SERVICO s where a.idUsuario=rows and a.idOperadora=opselected and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1));
+			
 			set nota_i = nota_i+1;
+			set questao_i = questao_i+1;
 
 		END LOOP simple_loop;
 
