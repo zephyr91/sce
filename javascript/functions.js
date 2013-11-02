@@ -123,6 +123,11 @@ function getSearch()
 	{
 		$('#main_column').html(data).show();
 	});
+
+	$.get('/php/getRelatorio.php?item=' + item + '&search=' + search, function(data)
+	{
+		$('#relatorio').html(data).show();
+	});
 }
 
 
