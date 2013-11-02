@@ -5,7 +5,7 @@ DELIMITER $$
 	CREATE PROCEDURE insert_rows (size INT) 
 		BEGIN
 		
-		DECLARE rows INT DEFAULT 0;
+		DECLARE rows INT DEFAULT 1;
 		
 		WHILE rows < size DO
 			
@@ -27,34 +27,40 @@ DROP PROCEDURE IF EXISTS avaliacao_rows $$
 CREATE PROCEDURE avaliacao_rows (size INT) 
 	BEGIN
 	
-		/*rows INT DEFAULT 20; na verdade precisa verificar quantos usuários existem através de um select. o padrão é 20*/
-		DECLARE rows INT DEFAULT 21;
+		/*numuser INT DEFAULT 20; é necessário verificar quantos usuários existem no banco. numuser deve ser o próximo usuário após o último*/
+		DECLARE numuser INT DEFAULT;
 		DECLARE opselected INT;
 		DECLARE op1 INT DEFAULT 1;
 		DECLARE op2 INT DEFAULT 4;
+		DECLARE idop INT;
 		DECLARE nota INT;
 		DECLARE nota_aux DOUBLE PRECISION;
-		DECLARE nota_i int DEFAULT 0;
-		DECLARE questao_i int DEFAULT 6;
-		DECLARE	idserv int;
+		DECLARE nota_i INT DEFAULT 0;
+		DECLARE questao_i INT DEFAULT 6;
+		DECLARE	idserv INT;
 
-
-	WHILE rows < size DO
+		SELECT COUNT(*) into numuser from USUARIO; 
+	/* numuser começa no default especificado acima. size precisa ser o numero final de users + 1 (olhar a quantidade de users total do banco)*/
+	WHILE numuser < size DO
 
 		SELECT mod(round(RAND() *10), 2)+1  into opselected from dual;
 
 		IF opselected=1 THEN
 			set idserv=8;
+			set idop=1;
 		ELSEIF opselected=2 THEN
 			set idserv=11;
+			set idop=4;
 		END IF;
 
-		insert into AVALIACAO values ('','',1,rows,opselected,'S');
-		insert into AVALIACAO_SERVICO values ((select a.idAvaliacao from AVALIACAO a, SERVICO s where a.idUsuario=rows and a.idOperadora=opselected and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1),idserv);
+		insert into AVALIACAO values ('','',1,numuser,idop,'S');
+		insert into AVALIACAO_SERVICO values ((select a.idAvaliacao from AVALIACAO a, SERVICO s where a.idUsuario=numuser and a.idOperadora=idop and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1),idserv);
 		
 		IF questao_i = 11 THEN
 			set questao_i = 6;
 		END IF;
+		
+		set nota_i=0;
 		
 		notas_loop: LOOP
 
@@ -64,7 +70,7 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 
 			END IF;
 
-			select truncate( RAND() , 1 ) into nota from dual;
+			select truncate( RAND() , 1 ) into nota_aux from dual;
 
 			CASE nota_aux
 				WHEN 0.0 THEN SET nota = 1;
@@ -79,15 +85,15 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 				WHEN 0.9 THEN SET nota = 5;
 			END CASE;
 
-			/*insert into RESPOSTA values ('',nota,rows,questao_i,(select idAvaliacao from AVALIACAO where idUsuario=rows order by idAvaliacao desc limit 0, 1));*/
-			insert into RESPOSTA values ('',nota,rows,questao_i,(select a.idAvaliacao from AVALIACAO a, SERVICO s where a.idUsuario=rows and a.idOperadora=opselected and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1));
+			/*insert into RESPOSTA values ('',nota,numuser,questao_i,(select idAvaliacao from AVALIACAO where idUsuario=numuser order by idAvaliacao desc limit 0, 1));*/
+			insert into RESPOSTA values ('',nota,numuser,questao_i,(select a.idAvaliacao from AVALIACAO a, SERVICO s where a.idUsuario=numuser and a.idOperadora=idop and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1));
 			
 			set nota_i = nota_i+1;
 			set questao_i = questao_i+1;
 
 		END LOOP notas_loop;
 
-	SET rows = rows + 1;
+	SET numuser = numuser + 1;
 	END WHILE;
 	END $$
 
