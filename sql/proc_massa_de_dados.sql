@@ -33,6 +33,7 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 		DECLARE op1 INT DEFAULT 1;
 		DECLARE op2 INT DEFAULT 4;
 		DECLARE nota INT;
+		DECLARE nota_aux DOUBLE PRECISION;
 		DECLARE nota_i int DEFAULT 0;
 		DECLARE questao_i int DEFAULT 6;
 		DECLARE	idserv int;
@@ -65,7 +66,7 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 
 			select truncate( RAND() , 1 ) into nota from dual;
 
-			CASE nota
+			CASE nota_aux
 				WHEN 0.0 THEN SET nota = 1;
 				WHEN 0.1 THEN SET nota = 1;
 				WHEN 0.2 THEN SET nota = 2;
@@ -84,7 +85,7 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 			set nota_i = nota_i+1;
 			set questao_i = questao_i+1;
 
-		END LOOP simple_loop;
+		END LOOP notas_loop;
 
 	SET rows = rows + 1;
 	END WHILE;

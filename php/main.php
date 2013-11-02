@@ -37,22 +37,22 @@ switch ($module)
 				switch ($_GET['adminpanel'])
 				{
 					case "manteroperadora":
-						echo $twig->render('manteroperadora.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user']));
+						echo $twig->render('manteroperadora.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'],'permission' => $_SESSION['permission']));
 						break;
 				
 					case "manterproduto":
-						echo $twig->render('manterproduto.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user']));
+						echo $twig->render('manterproduto.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'],'permission' => $_SESSION['permission']));
 						break;
 					
 					case "manterservico":
-						echo $twig->render('manterservico.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user']));
+						echo $twig->render('manterservico.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'],'permission' => $_SESSION['permission']));
 						break;
 					
 					case "manterusuario":
 						break;
 
 					case "manterquestao":
-						echo $twig->render('manterquestao.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user']));
+						echo $twig->render('manterquestao.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'],'permission' => $_SESSION['permission']));
 						break;
 				}
 			}
