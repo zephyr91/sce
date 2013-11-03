@@ -420,6 +420,18 @@ footer
 	font-size: 14px;
 }
 
+#relatorio
+{
+	min-height: 15px;
+}
+
+#relatorio_img
+{
+	min-height: 15px;
+	width: 500px;
+	height: 500px;
+}
+
 /*#user_form
 {
 	margin-left: 20%;

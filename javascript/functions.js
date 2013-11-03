@@ -122,12 +122,10 @@ function getSearch()
 	$.get('/php/getSearch.php?item=' + item + '&search=' + search, function(data)
 	{
 		$('#main_column').html(data).show();
+		relat = '/php/getRelatorio.php?item=' + item + '&search=' + search
+		$('#relatorio_img').attr('src', relat);
 	});
 
-	$.get('/php/getRelatorio.php?item=' + item + '&search=' + search, function(data)
-	{
-		$('#relatorio').html(data).show();
-	});
 }
 
 
