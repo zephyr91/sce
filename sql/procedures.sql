@@ -28,7 +28,7 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 	BEGIN
 	
 		/*numuser INT DEFAULT 20; é necessário verificar quantos usuários existem no banco. numuser deve ser o próximo usuário após o último*/
-		DECLARE numuser INT DEFAULT;
+		DECLARE numuser INT DEFAULT 0;
 		DECLARE opselected INT;
 		DECLARE op1 INT DEFAULT 1;
 		DECLARE op2 INT DEFAULT 4;
@@ -39,7 +39,7 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 		DECLARE questao_i INT DEFAULT 6;
 		DECLARE	idserv INT;
 
-		SELECT COUNT(*) into numuser from USUARIO; 
+		SELECT COUNT(*) into numuser from USUARIO where nomeUsuario not like 'U_%';
 	/* numuser começa no default especificado acima. size precisa ser o numero final de users + 1 (olhar a quantidade de users total do banco)*/
 	WHILE numuser < size DO
 
