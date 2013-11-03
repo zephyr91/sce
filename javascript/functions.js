@@ -122,8 +122,13 @@ function getSearch()
 	$.get('/php/getSearch.php?item=' + item + '&search=' + search, function(data)
 	{
 		$('#main_column').html(data).show();
-		relat = '/php/getRelatorio.php?item=' + item + '&search=' + search
-		$('#relatorio_img').attr('src', relat);
+
+		relat_media_prod_serv = '/php/getRelatorio.php?item=' + item + '&search=' + search + '&relat=1'
+		$('#media_prod_serv_img').attr('src', relat_media_prod_serv);
+
+		best_worst_prod_serv = '/php/getRelatorio.php?item=' + item + '&search=' + search + '&relat=2'
+		$('#best_worst_relat').attr('src', best_worst_prod_serv);
+
 	});
 
 }
