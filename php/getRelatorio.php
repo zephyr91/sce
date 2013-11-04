@@ -23,10 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			switch ($relat)
 			{
 				case '1':
-
-								//$pesquisa = "Pesquisa de Operadoras";
-								//$tipo = "OPERADORA";
-								//$coluna = "nomeOperadora";
 								$select = "select o.nomeOperadora,round(sum(a.media)/count(*),2) from AVALIACAO a, AVALIACAO_SERVICO ap, OPERADORA o where a.idAvaliacao=ap.idAvaliacao and a.idOperadora=o.idOperadora and o.nomeOperadora='$busca' group by nomeOperadora;";
 								$results = $dbh->query($select);
 								$dados = $results->fetch();
@@ -66,8 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 								/* Draw the chart scale */ 
 								$myPicture->setGraphArea(100,70,480,240);
 								$myPicture->drawScale(array("CycleBackground"=>TRUE,"DrawSubTicks"=>TRUE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>10,"Pos"=>SCALE_POS_TOPBOTTOM));
-								
-
 
 								/* Turn on shadow computing */ 
 								$myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
@@ -78,9 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 								/* Draw the chart */ 
 								$myPicture->drawBarChart(array("DisplayPos"=>LABEL_POS_INSIDE,"DisplayValues"=>TRUE,"Rounded"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
-
-								/* Write the legend */ 
-								//$myPicture->drawLegend(570,215,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
 
 								/* Render the picture (choose the best way) */
 								$myPicture->autoOutput("media_prod_serv.png");
@@ -124,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							$best_worst->addPoints(array($dados4[0],$dados3[0],$dados2[0],$dados1[0]),"Media");
 							$best_worst->setAxisName(0,"Média");
 							$best_worst->addPoints(array("$dados4[1]","$dados3[1]","$dados2[1]","$dados1[1]"),"bests_worsts");
-							$best_worst->setSerieDescription("bests_worsts","Month");
+							$best_worst->setSerieDescription("bests_worsts","melhor_pior");
 							$best_worst->setAbscissa("bests_worsts");
 							$best_worst->setAbscissaName("Produto / Serviço");
 
@@ -148,9 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
 							$best_worst_pic->drawScale($scaleSettings);
 
-							/* Write the chart legend */
-							//$best_worst_pic->drawLegend(780,12,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
-
 							/* Turn on shadow computing */ 
 							$best_worst_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
 
@@ -168,28 +156,173 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			break;
 
 		case "Produtos":
-			/*$pesquisa = "Pesquisa de Produtos";
+			$pesquisa = "Pesquisa de Produtos";
 			$tipo = "PRODUTO";
 			$coluna = "nomeProduto";
 			$busca_explode = explode(" [", $busca);
 			$operadora_explode = explode("]", $busca_explode[1]);
-			$select = "select o.nomeOperadora,t.nomeProduto,t.descricaoProduto from $tipo t, OPERADORA o where $coluna='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and t.idOperadora = o.IdOperadora;";
-			$results = $dbh->query($select);
-			$dados = $results->fetch();
-			echo $twig->render('getSearch.html', array('tipo' => $tipo, 'operadora' => $dados[0],'nome' => $dados[1],'descricao' => $dados[2],'pesquisa' => $pesquisa));*/
+			//$select = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_PRODUTO ap,PRODUTO p, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and  p.nomeProduto='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' group by rep.nota;";
+			//$results = $dbh->query($select);
+			//$dados = $results->fetch();
+
+				$nota1 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_PRODUTO ap,PRODUTO p, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and p.idOperadora=o.idOperadora and p.nomeProduto='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=1;";
+				$nota2 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_PRODUTO ap,PRODUTO p, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and p.idOperadora=o.idOperadora and p.nomeProduto='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=2;";
+				$nota3 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_PRODUTO ap,PRODUTO p, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and p.idOperadora=o.idOperadora and p.nomeProduto='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=3;";
+				$nota4 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_PRODUTO ap,PRODUTO p, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and p.idOperadora=o.idOperadora and p.nomeProduto='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=4;";
+				$nota5 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_PRODUTO ap,PRODUTO p, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and p.idOperadora=o.idOperadora and p.nomeProduto='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=5;";
+				$results1 = $dbh->query($nota1);
+				$results2 = $dbh->query($nota2);
+				$results3 = $dbh->query($nota3);
+				$results4 = $dbh->query($nota4);
+				$results5 = $dbh->query($nota5);
+				$dados1 = $results1->fetch();
+				$dados2 = $results2->fetch();
+				$dados3 = $results3->fetch();
+				$dados4 = $results4->fetch();
+				$dados5 = $results5->fetch();
+
+				if ($dados1[0] == 0)
+				{
+					$dados1[1] = "1";
+				}
+				if ($dados2[0] == 0)
+				{
+					$dados2[1] = "2";
+				}
+				if ($dados3[0] == 0)
+				{
+					$dados3[1] = "3";
+				}
+				if ($dados4[0] == 0)
+				{
+					$dados4[1] = "4";
+				}
+				if ($dados5[0] == 0)
+				{
+					$dados5[1] = "5";
+				}							
+				$total_notas = new pData();
+				$total_notas->addPoints(array($dados1[0],$dados2[0],$dados3[0],$dados4[0],$dados5[0]),"totalnotas");
+				$total_notas->setAxisName(0,"Total de notas");
+				$total_notas->addPoints(array("$dados1[1]","$dados2[1]","$dados3[1]","$dados4[1]","$dados5[1]"),"total_notas");
+				$total_notas->setSerieDescription("total_notas","nota");
+				$total_notas->setAbscissa("total_notas");
+				$total_notas->setAbscissaName("Notas");
+
+				/* Create the pChart object */
+				$total_notas_pic = new pImage(800,300,$total_notas);
+
+				/* Turn of Antialiasing */
+				$total_notas_pic->Antialias = FALSE;
+
+				/* Add a border to the picture */
+				$total_notas_pic->drawGradientArea(0,0,800,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+
+				/* Set the default font */
+				$total_notas_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+				$total_notas_pic->drawText(300,0,"Quantidades de notas do produto",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+
+				/* Define the chart area */
+				$total_notas_pic->setGraphArea(100,30,780,240);
+
+				/* Draw the scale */
+				$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+				$total_notas_pic->drawScale($scaleSettings);
+
+				/* Turn on shadow computing */ 
+				$total_notas_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+				/* Draw the chart */
+				$total_notas_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+				$settings = array("DisplayValues"=>TRUE,"Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
+				$total_notas_pic->drawBarChart($settings);
+
+				/* Render the picture (choose the best way) */
+				$total_notas_pic->autoOutput("total_notas.png");
 			
 			break;
 
 		case "Serviços":
-			/*$pesquisa = "Pesquisa de Serviços";
+			$pesquisa = "Pesquisa de Serviços";
 			$tipo = "SERVICO";
 			$coluna = "nomeServico";
 			$busca_explode = explode(" [", $busca);
 			$operadora_explode = explode("]", $busca_explode[1]);
-			$select = "select o.nomeOperadora,t.nomeServico,t.descricaoServico from $tipo t, OPERADORA o where $coluna='" . $busca_explode[0] . "' and o.nomeOperadora='" . $operadora_explode[0] . "' and t.idOperadora = o.IdOperadora;";
-			$results = $dbh->query($select);
-			$dados = $results->fetch();
-			echo $twig->render('getSearch.html', array('tipo' => $tipo, 'operadora' => $dados[0],'nome' => $dados[1],'descricao' => $dados[2],'pesquisa' => $pesquisa));*/
+
+				$nota1 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_SERVICO aser,SERVICO s, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and s.idOperadora=o.idOperadora and s.nomeServico='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=1;";
+				$nota2 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_SERVICO aser,SERVICO s, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and s.idOperadora=o.idOperadora and s.nomeServico='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=2;";
+				$nota3 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_SERVICO aser,SERVICO s, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and s.idOperadora=o.idOperadora and s.nomeServico='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=3;";
+				$nota4 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_SERVICO aser,SERVICO s, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and s.idOperadora=o.idOperadora and s.nomeServico='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=4;";
+				$nota5 = "select count(rep.nota),rep.nota from RESPOSTA rep, AVALIACAO a, AVALIACAO_SERVICO aser,SERVICO s, OPERADORA o where rep.idAvaliacao=a.idAvaliacao and a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and s.idOperadora=o.idOperadora and s.nomeServico='$busca_explode[0]' and o.nomeOperadora='$operadora_explode[0]' and rep.nota=5;";
+				$results1 = $dbh->query($nota1);
+				$results2 = $dbh->query($nota2);
+				$results3 = $dbh->query($nota3);
+				$results4 = $dbh->query($nota4);
+				$results5 = $dbh->query($nota5);
+				$dados1 = $results1->fetch();
+				$dados2 = $results2->fetch();
+				$dados3 = $results3->fetch();
+				$dados4 = $results4->fetch();
+				$dados5 = $results5->fetch();
+
+				if ($dados1[0] == 0)
+				{
+					$dados1[1] = "1";
+				}
+				if ($dados2[0] == 0)
+				{
+					$dados2[1] = "2";
+				}
+				if ($dados3[0] == 0)
+				{
+					$dados3[1] = "3";
+				}
+				if ($dados4[0] == 0)
+				{
+					$dados4[1] = "4";
+				}
+				if ($dados5[0] == 0)
+				{
+					$dados5[1] = "5";
+				}							
+				$total_notas = new pData();
+				$total_notas->addPoints(array($dados1[0],$dados2[0],$dados3[0],$dados4[0],$dados5[0]),"totalnotas");
+				$total_notas->setAxisName(0,"Total de notas");
+				$total_notas->addPoints(array("$dados1[1]","$dados2[1]","$dados3[1]","$dados4[1]","$dados5[1]"),"total_notas");
+				$total_notas->setSerieDescription("total_notas","nota");
+				$total_notas->setAbscissa("total_notas");
+				$total_notas->setAbscissaName("Notas");
+
+				/* Create the pChart object */
+				$total_notas_pic = new pImage(800,300,$total_notas);
+
+				/* Turn of Antialiasing */
+				$total_notas_pic->Antialias = FALSE;
+
+				/* Add a border to the picture */
+				$total_notas_pic->drawGradientArea(0,0,800,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+
+				/* Set the default font */
+				$total_notas_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+				$total_notas_pic->drawText(300,0,"Quantidades de notas do serviço",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+
+				/* Define the chart area */
+				$total_notas_pic->setGraphArea(100,30,780,240);
+
+				/* Draw the scale */
+				$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+				$total_notas_pic->drawScale($scaleSettings);
+
+				/* Turn on shadow computing */ 
+				$total_notas_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+				/* Draw the chart */
+				$total_notas_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+				$settings = array("DisplayValues"=>TRUE,"Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
+				$total_notas_pic->drawBarChart($settings);
+
+				/* Render the picture (choose the best way) */
+				$total_notas_pic->autoOutput("total_notas.png");
 			
 			break;
 	}
