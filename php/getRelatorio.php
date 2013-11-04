@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 								$MyData = new pData();
 								$MyData->addPoints(array($media_produto,$media_servico),"Média");
-								$MyData->setAxisName(0,"Média Geral");
+								$MyData->setAxisName(0,"Média");
 								$MyData->addPoints(array("PRODUTOS","SERVIÇOS"),"operadora");
 								$MyData->setSerieDescription("operadora","operadora");
 								$MyData->setAbscissa("operadora");
@@ -50,11 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 								/* Create the pChart object */
 								$myPicture = new pImage(500,250,$MyData);
 								$myPicture->drawGradientArea(0,0,500,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
-								$myPicture->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/pf_arma_five.ttf","FontSize"=>9));
+								$myPicture->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+								$myPicture->drawText(300,0,"Média geral de produtos e serviços",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 								/* Draw the chart scale */ 
-								$myPicture->setGraphArea(100,30,480,240);
+								$myPicture->setGraphArea(100,70,480,240);
 								$myPicture->drawScale(array("CycleBackground"=>TRUE,"DrawSubTicks"=>TRUE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>10,"Pos"=>SCALE_POS_TOPBOTTOM));
+								
+
 
 								/* Turn on shadow computing */ 
 								$myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
@@ -67,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 								$myPicture->drawBarChart(array("DisplayPos"=>LABEL_POS_INSIDE,"DisplayValues"=>TRUE,"Rounded"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
 
 								/* Write the legend */ 
-								$myPicture->drawLegend(570,215,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
+								//$myPicture->drawLegend(570,215,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
 
 								/* Render the picture (choose the best way) */
 								$myPicture->autoOutput("media_prod_serv.png");
@@ -77,48 +80,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 				case '2':
 
+							$maiorP = "select max(media),nomeProduto from AVALIACAO a, AVALIACAO_PRODUTO ap, PRODUTO p, OPERADORA o where o.nomeOperadora='$busca' and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and p.idOperadora = o.idOperadora group by nomeProduto order by media desc limit 0, 1;";
+							$maiorS = "select max(media),nomeServico from AVALIACAO a, AVALIACAO_SERVICO aser, SERVICO s, OPERADORA o where o.nomeOperadora='$busca' and a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and s.idOperadora = o.idOperadora group by nomeServico order by media desc limit 0, 1;";
+							$menorP = "select min(media),nomeProduto from AVALIACAO a, AVALIACAO_PRODUTO ap, PRODUTO p, OPERADORA o where o.nomeOperadora='$busca' and a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and p.idOperadora = o.idOperadora group by nomeProduto order by media limit 0, 1;";
+							$menorS = "select min(media),nomeServico from AVALIACAO a, AVALIACAO_SERVICO aser, SERVICO s, OPERADORA o where o.nomeOperadora='$busca'and a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and s.idOperadora = o.idOperadora group by nomeServico order by media limit 0, 1;";
+							$results1 = $dbh->query($maiorS);
+							$results2 = $dbh->query($maiorP);
+							$results3 = $dbh->query($menorS);
+							$results4 = $dbh->query($menorP);
+							$dados1 = $results1->fetch();
+							$dados2 = $results2->fetch();
+							$dados3 = $results3->fetch();
+							$dados4 = $results4->fetch();
+
+							if ($dados1[0] == 0 || $dados2[0] == 0 || $dados3[0] == 0 || $dados4[0] == 0)
+							{
+								echo "<script>$('#best_worst_relat').attr('src', '/images/indisponivel.png');</script>";
+								exit();
+							}
+							
 							$best_worst = new pData();
-							$best_worst->addPoints(array(150,220,300,250,420,200,300,200,100),"Server A");
-							$best_worst->addPoints(array(140,0,340,300,320,300,200,100,50),"Server B");
-							$best_worst->setAxisName(0,"Hits");
-							$best_worst->addPoints(array("January","February","March","April","May","Juin","July","August","September"),"Months");
-							$best_worst->setSerieDescription("Months","Month");
-							$best_worst->setAbscissa("Months");
+							$best_worst->addPoints(array($dados4[0],$dados3[0],$dados2[0],$dados1[0]),"Media");
+							$best_worst->setAxisName(0,"Média");
+							$best_worst->addPoints(array("$dados4[1]","$dados3[1]","$dados2[1]","$dados1[1]"),"bests_worsts");
+							$best_worst->setSerieDescription("bests_worsts","Month");
+							$best_worst->setAbscissa("bests_worsts");
+							$best_worst->setAbscissaName("Produto / Serviço");
 
 							/* Create the pChart object */
-							$best_worst_pic = new pImage(700,230,$best_worst);
+							$best_worst_pic = new pImage(800,300,$best_worst);
 
 							/* Turn of Antialiasing */
 							$best_worst_pic->Antialias = FALSE;
 
 							/* Add a border to the picture */
-							$best_worst_pic->drawGradientArea(0,0,700,230,DIRECTION_VERTICAL,array("StartR"=>240,"StartG"=>240,"StartB"=>240,"EndR"=>180,"EndG"=>180,"EndB"=>180,"Alpha"=>100));
-							$best_worst_pic->drawGradientArea(0,0,700,230,DIRECTION_HORIZONTAL,array("StartR"=>240,"StartG"=>240,"StartB"=>240,"EndR"=>180,"EndG"=>180,"EndB"=>180,"Alpha"=>20));
-							$best_worst_pic->drawRectangle(0,0,699,229,array("R"=>0,"G"=>0,"B"=>0));
+							$best_worst_pic->drawGradientArea(0,0,800,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
 
 							/* Set the default font */
-							$best_worst_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/pf_arma_five.ttf","FontSize"=>6));
+							$best_worst_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+							$best_worst_pic->drawText(300,0,"Piores/Melhores produtos e serviços",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 							/* Define the chart area */
-							$best_worst_pic->setGraphArea(60,40,650,200);
+							$best_worst_pic->setGraphArea(100,30,780,240);
 
 							/* Draw the scale */
 							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
 							$best_worst_pic->drawScale($scaleSettings);
 
 							/* Write the chart legend */
-							$best_worst_pic->drawLegend(580,12,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
+							//$best_worst_pic->drawLegend(780,12,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
 
 							/* Turn on shadow computing */ 
 							$best_worst_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
 
 							/* Draw the chart */
 							$best_worst_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
-							$settings = array("Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
+							$settings = array("DisplayValues"=>TRUE,"Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
 							$best_worst_pic->drawBarChart($settings);
 
 							/* Render the picture (choose the best way) */
-							$best_worst_pic->autoOutput("pictures/example.drawBarChart.spacing.png");
+							$best_worst_pic->autoOutput("best_worst.png");
 
 					break;
 			}
