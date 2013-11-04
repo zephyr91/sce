@@ -1,6 +1,6 @@
 {% if tipo == 'OPERADORA' %}
 
-	<div id="busca-de-dados" algin="center" class="left">
+	<div id="busca-de-dados" class="left">
 		<h1>{{pesquisa}}</h1>
 		<p><label><b>Nome: </b>{{nome}}</label></p>
 		<p><label><b>Endereço: </b>{{endereco}}</label></p>
@@ -10,16 +10,15 @@
 	</div>
 	<div class="right" id="relatorio">
 		<img id="media_prod_serv_img" src="" />
-		<img id="best_worst_relat" src="" />
 	</div>
-
+		<img id="best_worst_relat" src="" />
 
 {% endif %}
 
 
 {% if tipo == 'PRODUTO' %}
 
-	<div id="busca-de-dados" algin="center" class="left">
+	<div id="busca-de-dados" class="left">
 		<h1>{{pesquisa}}</h1>
 		<p><label><b>Operadora pertencente: </b>{{operadora}}</label></p>
 		<p><label><b>Nome: </b>{{nome}}</label></p>
@@ -27,9 +26,8 @@
 	</div>
 	<div class="right" id="relatorio">
 		<img id="media_prod_serv_img" src="" />
-		<img id="best_worst_relat" src="" />
 	</div>
-
+	<img id="best_worst_relat" src="" />
 
 {% endif %}
 
@@ -37,16 +35,15 @@
 
 {% if tipo == 'SERVICO' %}
 
-	<div id="busca-de-dados" algin="center" class="left">
+	<div id="busca-de-dados" class="left">
 		<h1>{{pesquisa}}</h1>
 		<p><label><b>Operadora pertencente: </b>{{operadora}}</label></p>
 		<p><label><b>Nome: </b>{{nome}}</label></p>
 		<p><label><b>Descrição: </b>{{descricao}}</label></p>
 	</div>
-	<div class="right" id="relatorio">
+	<div class="rigth" id="relatorio">
 		<img id="media_prod_serv_img" src="" />
-		<img id="best_worst_relat" src="" />
 	</div>
-
+		<img id="best_worst_relat" src="" />
 
 {% endif %}
