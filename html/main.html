@@ -54,7 +54,7 @@
 							{% elseif tipouser == 'juridico' %}
 						
 								<li>
-									<a class="loginbox_link" href="#"><p>Relatorios</p></a>
+									<a class="loginbox_link" href="/?module=relatorios"><p>Relatorios</p></a>
 								</li>
 							
 							{% endif %}
@@ -123,6 +123,12 @@
 				
 				{% block admin_manter %}
 				{% endblock admin_manter %}
+				
+				{% block relatorios %}
+				{% endblock relatorios %}
+				
+				{% block myeval %}
+				{% endblock myeval %}
 
 			</div>
 
