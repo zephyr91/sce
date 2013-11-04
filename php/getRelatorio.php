@@ -37,11 +37,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 								$media_produto = $dados2[1];
 								$media_servico = $dados[1];
+								$tipo_s = "SERVIÇOS";
+								$tipo_p = "PRODUTOS";
+
+								if ($media_servico == 0)
+								{
+									$tipo_s = "Sem avaliações";
+								}
+								if ($media_produto == 0)
+								{
+									$tipo_p = "Sem avaliações";
+								}
 
 								$MyData = new pData();
 								$MyData->addPoints(array($media_produto,$media_servico),"Média");
 								$MyData->setAxisName(0,"Média");
-								$MyData->addPoints(array("PRODUTOS","SERVIÇOS"),"operadora");
+								$MyData->addPoints(array("$tipo_p","$tipo_s"),"operadora");
 								$MyData->setSerieDescription("operadora","operadora");
 								$MyData->setAbscissa("operadora");
 								$MyData->setAbscissaName("");
@@ -92,10 +103,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							$dados3 = $results3->fetch();
 							$dados4 = $results4->fetch();
 
-							if ($dados1[0] == 0 || $dados2[0] == 0 || $dados3[0] == 0 || $dados4[0] == 0)
+							if ($dados1[0] == 0)
 							{
-								echo "<script>$('#best_worst_relat').attr('src', '/images/indisponivel.png');</script>";
-								exit();
+								$dados1[1] = "Sem avaliações";
+							}
+							if ($dados2[0] == 0)
+							{
+								$dados2[1] = "Sem avaliações";
+							}
+							if ($dados3[0] == 0)
+							{
+								$dados3[1] = "Sem avaliações";
+							}
+							if ($dados4[0] == 0)
+							{
+								$dados4[1] = "Sem avaliações";
 							}
 							
 							$best_worst = new pData();
@@ -117,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 							/* Set the default font */
 							$best_worst_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
-							$best_worst_pic->drawText(300,0,"Piores/Melhores produtos e serviços",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+							$best_worst_pic->drawText(300,0,"Piores/Melhores produtos e serviços avaliados",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 							/* Define the chart area */
 							$best_worst_pic->setGraphArea(100,30,780,240);
