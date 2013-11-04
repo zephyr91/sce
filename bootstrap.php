@@ -7,5 +7,5 @@ require  __DIR__ . '/pChart2.1.3/class/pData.class.php';
 
 $loader = new Twig_Loader_Filesystem( __DIR__ . '/html');
 $twig = new Twig_Environment($loader, array(
-    'cache' =>  '/tmp/cache',
+    'cache' =>  '/cache',
 ));
