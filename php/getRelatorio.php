@@ -2,7 +2,6 @@
 
 require '../bootstrap.php';
 
-
 session_start();
 
 $dsn = 'mysql:dbname=sce;host=localhost';
