@@ -80,6 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$count = $result->rowCount();
 		if($count == 1)
 		{
+			$insert_log = "insert into LOG_ESTRUTURA_QUESTAO values (current_timestamp,'$questao','$ed_questao',(select idEstruturaQuestao from ESTRUTURA_QUESTAO where texto='$questao'))";
+			$insert_result = $dbh->query($insert_log);
 			$update = "update ESTRUTURA_QUESTAO set texto='$ed_questao' where texto='$questao' and tipoQuestao='$tipo';";
 			$update_result = $dbh->query($update);
 			echo "sucesso";
