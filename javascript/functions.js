@@ -180,6 +180,19 @@ function hideEditUser()
 	document.getElementById('edit_dados').style.display="none";
 }
 
+function relatoriosJuridico()
+{
+	var escolhido = document.getElementById('list_relatorios').value;
+
+	$.get('/php/relatorios.php?escolhido=' + escolhido, function(data)
+	{
+		$('#main_column').html(data).show();
+		
+		relatorio1 = '/php/relatoriosjuridico.php?item=' + item + '&search=' + search + '&relat=1'
+		$('#img_relatorio1').attr('src', relatorio1);
+	});
+}
+
 function listQuestoes()
 {
 	var tipo = document.getElementById('list_tipos').value;

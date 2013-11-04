@@ -86,7 +86,16 @@ switch ($module)
 		
 		
 		break;
+	
+	case "relatorios":
 		
+		echo $twig->render('relatoriosjuridico.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'permission' => $_SESSION['permission']));
+		break;
+		
+	case "myeval":
+	
+		echo $twig->render('minhasavaliacoes.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'permission' => $_SESSION['permission']));
+		break;
 };
 
 ?>
