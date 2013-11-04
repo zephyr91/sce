@@ -432,6 +432,14 @@ footer
 	height: 500px;
 }
 
+#best_worst_relat
+{
+	clear: both;
+	min-height: 15px;
+	width: 500px;
+	height: 500px;	
+}
+
 /*#user_form
 {
 	margin-left: 20%;
