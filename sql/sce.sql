@@ -138,6 +138,7 @@ CREATE TABLE AVALIACAO
   idUsuario   INTEGER NOT NULL ,
   idOperadora INTEGER NOT NULL ,
   validacao   char(1) not null,
+  media       DOUBLE PRECISION (2,1) not null,
   FOREIGN KEY (idOperadora) REFERENCES OPERADORA (idOperadora) ,
   FOREIGN KEY (idUsuario) REFERENCES USUARIO (idUsuario) ,
   PRIMARY KEY (idAvaliacao)

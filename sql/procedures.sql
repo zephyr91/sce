@@ -38,9 +38,14 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 		DECLARE nota_i INT DEFAULT 0;
 		DECLARE questao_i INT DEFAULT 6;
 		DECLARE	idserv INT;
+		DECLARE media_c INT;
+		DECLARE media_final DOUBLE PRECISION (2,1);
+		DECLARE last_avaliacao INT;
 
 		SELECT COUNT(*) into numuser from USUARIO where nomeUsuario not like 'U_%';
 	/* numuser começa no default especificado acima. size precisa ser o numero final de users + 1 (olhar a quantidade de users total do banco)*/
+		set size = size+numuser;
+		
 	WHILE numuser < size DO
 
 		SELECT mod(round(RAND() *10), 2)+1  into opselected from dual;
@@ -48,12 +53,15 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 		IF opselected=1 THEN
 			set idserv=8;
 			set idop=1;
+			set media_c=0;
 		ELSEIF opselected=2 THEN
 			set idserv=11;
 			set idop=4;
+			set media_c=0;
 		END IF;
 
-		insert into AVALIACAO values ('','',1,numuser,idop,'S');
+		insert into AVALIACAO values ('','',1,numuser,idop,'S',0);
+		select a.idAvaliacao into last_avaliacao from AVALIACAO a, SERVICO s where a.idUsuario=numuser and a.idOperadora=idop and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1;
 		insert into AVALIACAO_SERVICO values ((select a.idAvaliacao from AVALIACAO a, SERVICO s where a.idUsuario=numuser and a.idOperadora=idop and s.idServico=idserv order by a.idAvaliacao desc limit 0, 1),idserv);
 		
 		IF questao_i = 11 THEN
@@ -90,8 +98,13 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 			
 			set nota_i = nota_i+1;
 			set questao_i = questao_i+1;
+			set media_c = media_c + nota;
 
 		END LOOP notas_loop;
+
+		set media_final=media_c/5;
+
+		update AVALIACAO set media=media_final where idAvaliacao=last_avaliacao;
 
 	SET numuser = numuser + 1;
 	END WHILE;
