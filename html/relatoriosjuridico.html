@@ -7,13 +7,24 @@
 	<p><h3 align="center">Relatórios</h3></p>
 	<br/>
 	
-	<p><label><b>Tipo de relatório: </b><label><select onchange="relatoriosJuridico()" id="list_tipos" name="list_tipos">
-	<option>Relatório 1</option><option>Relatório 2</option><option>Relatório 3</option><option>Relatório 4</option><option>Relatório 5</option>
-	</select></p>
-
-	<p><img id="img_relatorio1" src="" /></p>
+	<p><label><b>Tipo de relatório: </b></label><select onchange="listJuridico();" id="list_tipos_relatorios" name="list_tipos">
+	<option>Operadora</option><option>Produtos</option><option>Serviços</option>
+	</select>
+	
+	<label><b>Selecione: </b></label><select onchange="relatoriosJuridico();" id="relatorios_juridico" name="relatorios_juridico"></select></p>
 	
 
+	<div id="relatoriografico" class="left">
+	
+		<img id="img_relatorio" src="" />
+	
+	</div>
+	
+	<div id="relatoriotabela" class="right">
+	
+	
+
+	</div>
 	
 </div>
 {% endblock relatorios %}

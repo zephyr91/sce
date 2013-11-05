@@ -190,16 +190,24 @@ function hideEditUser()
 	document.getElementById('edit_dados').style.display="none";
 }
 
+function listJuridico()
+{
+	var tipo = document.getElementById('list_tipos_relatorios').value;
+
+	$.get('/php/relatoriosjuridico.php?tipo=' + tipo, function(data)
+	{
+		$('#relatorios_juridico').html(data).show();
+	});
+}
+
 function relatoriosJuridico()
 {
-	var escolhido = document.getElementById('list_relatorios').value;
+	var escolhido = document.getElementById('relatorios_juridico').value;
+	var tipo = document.getElementById('list_tipos_relatorios').value;
 
-	$.get('/php/relatorios.php?escolhido=' + escolhido, function(data)
+	$.get('/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo, function(data)
 	{
-		$('#main_column').html(data).show();
-		
-		relatorio1 = '/php/relatoriosjuridico.php?item=' + item + '&search=' + search + '&relat=1'
-		$('#img_relatorio1').attr('src', relatorio1);
+
 	});
 }
 
