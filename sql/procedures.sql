@@ -6,10 +6,55 @@ DELIMITER $$
 		BEGIN
 		
 		DECLARE rows INT DEFAULT 1;
-		
+		DECLARE estado INT;
+		DECLARE estado_id char(2);
+		DECLARE idade INT;
+		DECLARE sexo_id char(1);
+		DECLARE sexo INT;
+
+
 		WHILE rows < size DO
+		SELECT (FLOOR( 1 + RAND( ) *50 )) into idade FROM dual;
+		SELECT (FLOOR( 1 + RAND( ) *27 )) into estado FROM dual;
+		SELECT mod(round(RAND() *10), 2)+1  into sexo FROM dual;
 			
-			insert into `USUARIO` values ('',concat('U_',rows),'1980/02/15',concat('U_',rows,'@gmail.com'),'d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca','SP','São Paulo','Itaim Bibi','Rua Aluísio nº 1234','11954756612','U','');
+			CASE sexo
+				WHEN 1 THEN SET sexo_id = "M";
+				WHEN 2 THEN SET sexo_id = "F";
+			END CASE;
+
+			CASE estado
+				WHEN 1 THEN SET estado_id = 'AC';
+				WHEN 2 THEN SET estado_id = 'AL';
+				WHEN 3 THEN SET estado_id = 'AP';
+				WHEN 4 THEN SET estado_id = 'AM';
+				WHEN 5 THEN SET estado_id = 'BA';
+				WHEN 6 THEN SET estado_id = 'CE';
+				WHEN 7 THEN SET estado_id = 'DF';
+				WHEN 8 THEN SET estado_id = 'ES';
+				WHEN 9 THEN SET estado_id = 'GO';
+				WHEN 10 THEN SET estado_id = 'MA';
+				WHEN 11 THEN SET estado_id = 'MT';
+				WHEN 12 THEN SET estado_id = 'MS';
+				WHEN 13 THEN SET estado_id = 'MG';
+				WHEN 14 THEN SET estado_id = 'PA';
+				WHEN 15 THEN SET estado_id = 'PB';
+				WHEN 16 THEN SET estado_id = 'PR';
+				WHEN 17 THEN SET estado_id = 'PE';
+				WHEN 18 THEN SET estado_id = 'PI';
+				WHEN 19 THEN SET estado_id = 'RJ';
+				WHEN 20 THEN SET estado_id = 'RN';
+				WHEN 21 THEN SET estado_id = 'RS';
+				WHEN 22 THEN SET estado_id = 'RO';
+				WHEN 23 THEN SET estado_id = 'RR';
+				WHEN 24 THEN SET estado_id = 'SC';
+				WHEN 25 THEN SET estado_id = 'SP';
+				WHEN 26 THEN SET estado_id = 'SE';
+				WHEN 27 THEN SET estado_id = 'TO';
+			END CASE;
+
+			insert into `USUARIO` values ('',concat('U_',rows),concat('19',50+idade,'/02/15'),concat('U_',rows,'@gmail.com'),'d7ae9de750a5640adf6e724d72643767faa73bca2941781dae9d276ff2d4b4ca',estado_id,'São Paulo','Itaim Bibi','Rua Aluísio nº 1234','11954756612','U','');
+			insert into `CONSUMIDOR` values ('11111111111','483792831',sexo_id,(select idUsuario from USUARIO order by idusuario desc limit 0, 1));
 			
 			SET rows = rows + 1;
 
@@ -18,6 +63,8 @@ DELIMITER $$
 
 
 DELIMITER $$
+
+
 
 
 DELIMITER $$
