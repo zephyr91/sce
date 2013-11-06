@@ -15,7 +15,7 @@ switch ($module)
 			require("php/control_panel.php");
 			
 			//Format Date;
-			$date_formated = date_create_from_format('d/m/Y', $dados_fisico[0]);
+			$date_formated = date_create_from_format('Y/m/d', $dados_fisico[0]);
 			$date_final = date_format($date_formated, 'd/m/Y');
 			
 			echo $twig->render('control_panel.html', array('nome' => $_SESSION['nome'],'tipouser' => $_SESSION['tipo_user'], 'dtnasc' => $dados_fisico[0], 'email' => $dados_fisico[1], 'uf' => $dados_fisico[2], 'municipio' => $dados_fisico[3], 'bairro' => $dados_fisico[4], 'endereco' => $dados_fisico[5], 'tel_princ' => $dados_fisico[6], 'tel_op' => $dados_fisico[7], 'cpf' => $dados_fisico[8], 'rg' => $dados_fisico[9], 'sexo' => $dados_fisico[10]));
