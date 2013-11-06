@@ -255,3 +255,4 @@ CREATE PROCEDURE avaliacao_rows (size INT)
 END $$
 
 DELIMITER $$
+
