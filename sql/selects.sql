@@ -26,7 +26,7 @@ SELECT SUM(a.media)/COUNT(a.media), u.unidadeFederativa FROM AVALIACAO a, USUARI
 
 -- 3) Média de idades dos usuários que avaliaram por região
 
-SELECT SUM((SELECT EXTRACT(YEAR FROM current_timestamp)) - (SELECT EXTRACT(YEAR FROM u.dataNascimento)))/COUNT(u.idUsuario), u.unidadeFederativa FROM USUARIO u, AVALIACAO a WHERE a.idUsuario = u.idUsuario GROUP BY u.unidadeFederativa;
+SELECT SUM((SELECT EXTRACT(YEAR FROM current_timestamp)) - (SELECT EXTRACT(YEAR FROM u.dataNascimento)))/COUNT(u.idUsuario) as idade_media, u.unidadeFederativa FROM USUARIO u, AVALIACAO a WHERE a.idUsuario = u.idUsuario GROUP BY u.unidadeFederativa;
 
 -- 4) 10 piores/melhores produtos/serviços avaliados
 
@@ -53,4 +53,4 @@ SELECT SUM(r.nota)/COUNT(r.nota), r.idEstruturaQuestao FROM RESPOSTA r, ESTRUTUR
 
 -- 6) Média por sexo
 
-SELECT SUM(a.media)/COUNT(a.media), uc.sexo FROM AVALIACAO a, USUARIO u, CONSUMIDOR uc WHERE a.idUsuario = u.idUsuario AND u.idUsuario = uc.idUsuario GROUP BY uc.sexo;
+SELECT truncate(SUM(a.media)/COUNT(a.media),2) as media, uc.sexo FROM AVALIACAO a, USUARIO u, CONSUMIDOR uc WHERE a.idUsuario = u.idUsuario AND u.idUsuario = uc.idUsuario GROUP BY uc.sexo;

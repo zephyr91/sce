@@ -207,7 +207,8 @@ function relatoriosJuridico()
 
 	$.get('/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo, function(data)
 	{
-
+			grafico = '/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo
+			$('#img_relatorio').attr('src', grafico);
 	});
 }
 
