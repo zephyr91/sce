@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							}
 							
 							$best_worst = new pData();
-							$best_worst->addPoints(array($dados4[0],$dados3[0],$dados2[0],$dados1[0]),"Media");
+							$best_worst->addPoints(array($dados4[0],$dados3[0],$dados2[0],$dados1[0]),"Média");
 							$best_worst->setAxisName(0,"Média");
 							$best_worst->addPoints(array("$dados4[1]","$dados3[1]","$dados2[1]","$dados1[1]"),"bests_worsts");
 							$best_worst->setSerieDescription("bests_worsts","melhor_pior");

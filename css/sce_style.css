@@ -30,7 +30,8 @@ p
 
 #enviar_inputs
 {
-	padding-left: 400px;
+	margin-left: 450px;
+
 }
 
 /*
@@ -434,11 +435,18 @@ footer
 	min-height: 15px;
 }
 
-/*#user_form
+#user_form
 {
 	margin-left: 20%;
 	margin-right: 20%;
-}*/
+}
+
+#user_form
+{
+	text-align: right;
+	float:left;
+}
+
 
 /* Begin Register */
 /*
@@ -494,7 +502,7 @@ footer
 /* End Panel */
 
 
-/* css de rating */
+/* CSS de RATING */
 
 	.rateit {
 	    display: -moz-inline-box;
