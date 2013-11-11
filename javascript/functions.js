@@ -122,6 +122,8 @@ function getSearch()
 	$.get('/php/getSearch.php?item=' + item + '&search=' + search, function(data)
 	{
 		$('#main_column').html(data).show();
+		$('#graph_img1').attr('src', '/images/loader.gif');
+		$('#graph_img2').attr('src', '/images/loader.gif');
 
 		if (item == "Operadora")
 		{
@@ -205,6 +207,8 @@ function relatoriosJuridico()
 	var escolhido = document.getElementById('relatorios_juridico').value;
 	var tipo = document.getElementById('list_tipos_relatorios').value;
 
+	$('#img_relatorio').attr('src', '/images/loader.gif');
+	
 	$.get('/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo, function(data)
 	{
 			grafico = '/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo
@@ -285,7 +289,7 @@ function editQuestao()
 		
 		else
 		{
-			alert("Your Browser Sucks!\nIt's about time to upgrade don't you think?");
+			alert("Seu browser não suporta HTML5\nAtualize para uma versão mais recente.");
 		}
 	}
 
@@ -301,8 +305,8 @@ function editQuestao()
 		{
 			document.getElementById('search_type').disabled=false;
 			document.getElementById('suggests').style.display="none";
-
 		}
+		
 		else
 		{
 			document.getElementById('search_type').disabled=true;
@@ -329,7 +333,6 @@ function editQuestao()
 			ss.innerHTML = '';
 			
 			var str = searchReq.responseText.split("\n");
-			
 			for(i=0; i < str.length - 1; i++)
 			{
 				//Build our element string.  This is cleaner using the DOM, but

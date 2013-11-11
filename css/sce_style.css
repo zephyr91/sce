@@ -125,6 +125,12 @@ h4
 			background-color: #4f9fc5;
 		}
 
+		#loader
+		{
+			height: 20px;
+			width: 20px;
+		}
+
 		#loginbox
 		{
 			color: black;
