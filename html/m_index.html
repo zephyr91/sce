@@ -2,12 +2,12 @@
 <html lang="pt-br">
 	
 	<head>
-		<title>My Page</title>
+		<title>SAOT - Sistema de Avaliação de Operadoras de Telecomunicações</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 		<script type="text/javascript" src="/javascript/jquery-2.0.2.js"></script>
 		<script type="text/javascript" src="/javascript/jquery.mobile.custom.js"></script>
 		<link rel="stylesheet" href="css/jquery.mobile.custom.structure.css">
-		<link rel="stylesheet" href="css/jquery.mobile.custom.theme.css">
+		<link rel="stylesheet" href="css/saot.css">
 
 	</head>
 
@@ -15,24 +15,24 @@
 		<div data-role="page">
 		
 			<div data-role="header">
-				<h1>My Title</h1>
+				<h1>SAOT</h1>
 			</div>
 			
 			<div data-role="content">
-				<p>Hello world</p>
-				<br/>
-				<ul data-role="listview" data-inset="true" data-filter="true">
-					<li><a href="#">Acura</a></li>
-					<li><a href="#">Audi</a></li>
-					<li><a href="#">BMW</a></li>
-					<li><a href="#">Cadillac</a></li>
-					<li><a href="#">Ferrari</a></li>
-				</ul>
-				<br/>
-				<form>
-					<label for="slider-0">Input slider:</label>
-					<input type="range" name="slider" id="slider-0" value="25" min="0" max="100" />
-				</form>
+				<label for="slider1">Input slider:</label>
+				
+				<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
+				
+				<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+					
+					<legend>Cache settings:</legend>
+					
+					<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
+					<label for="radio-choice-a1">On</label>
+					<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
+					<label for="radio-choice-b1">Off</label>
+				
+				</fieldset>
 				<br/>
 				<a href="#" data-role="button" data-icon="star" data-theme="a">Button</a>
 
