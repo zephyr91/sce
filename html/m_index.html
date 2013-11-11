@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-br">
+	
+	<head>
+		<title>My Page</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+		<script type="text/javascript" src="/javascript/jquery-2.0.2.js"></script>
+		<script type="text/javascript" src="/javascript/jquery.mobile.custom.js"></script>
+		<link rel="stylesheet" href="css/jquery.mobile.custom.structure.css">
+		<link rel="stylesheet" href="css/jquery.mobile.custom.theme.css">
+
+	</head>
+
+	<body>
+		<div data-role="page">
+		
+			<div data-role="header">
+				<h1>My Title</h1>
+			</div>
+			
+			<div data-role="content">
+				<p>Hello world</p>
+				<br/>
+				<ul data-role="listview" data-inset="true" data-filter="true">
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Ferrari</a></li>
+				</ul>
+				<br/>
+				<form>
+					<label for="slider-0">Input slider:</label>
+					<input type="range" name="slider" id="slider-0" value="25" min="0" max="100" />
+				</form>
+				<br/>
+				<a href="#" data-role="button" data-icon="star" data-theme="a">Button</a>
+
+			</div>
+			
+			<div data-role="footer">
+				<h4>My Footer</h4>
+			</div>
+
+		</div>
+	</body>
+
+</html>
