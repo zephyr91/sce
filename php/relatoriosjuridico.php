@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 							/* Set the default font */
 							$sexo_regiao_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
-							$sexo_regiao_pic->drawText(300,0,"Média de idade dos usuários por região",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+							$sexo_regiao_pic->drawText(300,0,"Média por sexo dos usuários",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 							/* Define the chart area */
 							$sexo_regiao_pic->setGraphArea(100,30,580,340);

@@ -1,6 +1,7 @@
 <?php
-
-$cache = $_SERVER['DOCUMENT_ROOT'] . '/cache_twig';
+$root=$_SERVER['DOCUMENT_ROOT'];
+$cache = $root . '/cache_twig';
+require $root  . '/libs/mobile/mobile_device_detect.php';
 require_once  __DIR__ . '/vendor/autoload.php';
 require  __DIR__ . '/pChart2.1.3/class/pDraw.class.php';
 require  __DIR__ . '/pChart2.1.3/class/pImage.class.php';
