@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	$tipo=$_GET['tipo'];
 	$escolhido=$_GET['escolhido'];
 	$nome=$_SESSION['nome'];
+	
 	if (isset($escolhido))
 	{
 		switch ($tipo)
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 						$dados=$result->fetchAll();
 
 							$qntd_regiao = new pData();
-							$qntd_regiao->addPoints(array($dados[0][0],$dados[1][0],$dados[2][0],$dados[3][0],$dados[4][0],$dados[5][0],$dados[6][0],$dados[7][0],$dados[8][0],$dados[9][0],$dados[10][0],$dados[11][0],$dados[12][0],$dados[13][0],$dados[14][0],$dados[15][0],$dados[16][0],$dados[17][0],$dados[18][0],$dados[19][0],$dados[20][0],$dados[21][0],$dados[22][0],$dados[23][0],$dados[24][0],$dados[25][0],$dados[26][0],"Quantidade");
+							$qntd_regiao->addPoints(array($dados[0][0],$dados[1][0],$dados[2][0],$dados[3][0],$dados[4][0],$dados[5][0],$dados[6][0],$dados[7][0],$dados[8][0],$dados[9][0],$dados[10][0],$dados[11][0],$dados[12][0],$dados[13][0],$dados[14][0],$dados[15][0],$dados[16][0],$dados[17][0],$dados[18][0],$dados[19][0],$dados[20][0],$dados[21][0],$dados[22][0],$dados[23][0],$dados[24][0],$dados[25][0],$dados[26][0]),"Quantidade");
 							$qntd_regiao->setAxisName(0,"QUANTIDADE");
 							$qntd_regiao->addPoints(array($dados[0][1],$dados[1][1],$dados[2][1],$dados[3][1],$dados[4][1],$dados[5][1],$dados[6][1],$dados[7][1],$dados[8][1],$dados[9][1],$dados[10][1],$dados[11][1],$dados[12][1],$dados[13][1],$dados[14][1],$dados[15][1],$dados[16][1],$dados[17][1],$dados[18][1],$dados[19][1],$dados[20][1],$dados[21][1],$dados[22][1],$dados[23][1],$dados[24][1],$dados[25][1],$dados[26][1]),"UF");
 							$qntd_regiao->setSerieDescription("UF","unidades");
