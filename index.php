@@ -7,7 +7,7 @@
 
 	if(mobile_device_detect(true,true,true,true,true,true,false,false))
 	{
-		echo "CHOVE";
+		echo $twig->render('m_index.html');
 	}
 
 	else
