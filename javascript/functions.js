@@ -127,6 +127,7 @@ function getSearch()
 
 		if (item == "Operadora")
 		{
+			document.getElementById('main_column').style.height="900px";
 			relat_media_prod_serv = '/php/getRelatorio.php?item=' + item + '&search=' + search + '&relat=1'
 			$('#graph_img1').attr('src', relat_media_prod_serv);
 
@@ -137,6 +138,7 @@ function getSearch()
 		
 		else
 		{
+			document.getElementById('main_column').style.height="600px";
 			total_notas = '/php/getRelatorio.php?item=' + item + '&search=' + search
 			$('#graph_img1').attr('src', total_notas);
 		}
