@@ -120,20 +120,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							$best_worst->setAbscissaName("Produto / Serviço");
 
 							/* Create the pChart object */
-							$best_worst_pic = new pImage(800,300,$best_worst);
+							$best_worst_pic = new pImage(755,280,$best_worst);
 
 							/* Turn of Antialiasing */
 							$best_worst_pic->Antialias = FALSE;
 
 							/* Add a border to the picture */
-							$best_worst_pic->drawGradientArea(0,0,800,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+							$best_worst_pic->drawGradientArea(0,0,755,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
 
 							/* Set the default font */
 							$best_worst_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
 							$best_worst_pic->drawText(300,0,"Piores/Melhores produtos e serviços avaliados",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 							/* Define the chart area */
-							$best_worst_pic->setGraphArea(100,30,780,240);
+							$best_worst_pic->setGraphArea(100,30,720,240);
 
 							/* Draw the scale */
 							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
@@ -210,20 +210,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 				$total_notas->setAbscissaName("Notas");
 
 				/* Create the pChart object */
-				$total_notas_pic = new pImage(800,300,$total_notas);
+				$total_notas_pic = new pImage(700,280,$total_notas);
 
 				/* Turn of Antialiasing */
 				$total_notas_pic->Antialias = FALSE;
 
 				/* Add a border to the picture */
-				$total_notas_pic->drawGradientArea(0,0,800,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+				$total_notas_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
 
 				/* Set the default font */
 				$total_notas_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
 				$total_notas_pic->drawText(300,0,"Quantidades de notas do produto",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 				/* Define the chart area */
-				$total_notas_pic->setGraphArea(100,30,780,240);
+				$total_notas_pic->setGraphArea(100,30,680,240);
 
 				/* Draw the scale */
 				$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
@@ -294,20 +294,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 				$total_notas->setAbscissaName("Notas");
 
 				/* Create the pChart object */
-				$total_notas_pic = new pImage(800,300,$total_notas);
+				$total_notas_pic = new pImage(700,280,$total_notas);
 
 				/* Turn of Antialiasing */
 				$total_notas_pic->Antialias = FALSE;
 
 				/* Add a border to the picture */
-				$total_notas_pic->drawGradientArea(0,0,800,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+				$total_notas_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
 
 				/* Set the default font */
 				$total_notas_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
 				$total_notas_pic->drawText(300,0,"Quantidades de notas do serviço",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 				/* Define the chart area */
-				$total_notas_pic->setGraphArea(100,30,780,240);
+				$total_notas_pic->setGraphArea(100,30,680,240);
 
 				/* Draw the scale */
 				$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);

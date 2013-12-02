@@ -36,20 +36,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							$qntd_regiao->setAbscissaName("UNIDADE FEDERATIVA");
 
 							/* Create the pChart object */
-							$qntd_regiao_pic = new pImage(1000,400,$qntd_regiao);
+							$qntd_regiao_pic = new pImage(700,380,$qntd_regiao);
 
 							/* Turn of Antialiasing */
 							$qntd_regiao_pic->Antialias = FALSE;
 
 							/* Add a border to the picture */
-							$qntd_regiao_pic->drawGradientArea(0,0,1000,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+							$qntd_regiao_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
 
 							/* Set the default font */
 							$qntd_regiao_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
 							$qntd_regiao_pic->drawText(300,0,"Quantidade de avaliações por região",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 							/* Define the chart area */
-							$qntd_regiao_pic->setGraphArea(100,30,980,340);
+							$qntd_regiao_pic->setGraphArea(100,30,680,340);
 
 							/* Draw the scale */
 							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
@@ -82,20 +82,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							$media_regiao->setAbscissaName("UNIDADE FEDERATIVA");
 
 							/* Create the pChart object */
-							$media_regiao_pic = new pImage(1000,400,$media_regiao);
+							$media_regiao_pic = new pImage(700,380,$media_regiao);
 
 							/* Turn of Antialiasing */
 							$media_regiao_pic->Antialias = FALSE;
 
 							/* Add a border to the picture */
-							$media_regiao_pic->drawGradientArea(0,0,1000,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+							$media_regiao_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
 
 							/* Set the default font */
 							$media_regiao_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
 							$media_regiao_pic->drawText(300,0,"Média das avaliações por região",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 							/* Define the chart area */
-							$media_regiao_pic->setGraphArea(100,30,980,340);
+							$media_regiao_pic->setGraphArea(100,30,680,340);
 
 							/* Draw the scale */
 							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
@@ -127,20 +127,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							$idade_regiao->setAbscissaName("UNIDADE FEDERATIVA");
 
 							/* Create the pChart object */
-							$idade_regiao_pic = new pImage(1000,400,$idade_regiao);
+							$idade_regiao_pic = new pImage(700,380,$idade_regiao);
 
 							/* Turn of Antialiasing */
 							$idade_regiao_pic->Antialias = FALSE;
 
 							/* Add a border to the picture */
-							$idade_regiao_pic->drawGradientArea(0,0,1000,500,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+							$idade_regiao_pic->drawGradientArea(0,0,800,400,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
 
 							/* Set the default font */
 							$idade_regiao_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
 							$idade_regiao_pic->drawText(300,0,"Média de idade dos usuários por região",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
 
 							/* Define the chart area */
-							$idade_regiao_pic->setGraphArea(100,30,980,340);
+							$idade_regiao_pic->setGraphArea(100,30,680,340);
 
 							/* Draw the scale */
 							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
@@ -208,16 +208,95 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			case 'Produtos':
 				switch ($escolhido)
 				{
-					case 'melhor x por y':
-						echo "grafico";
-						break; 
-					case 'melhor 2 por z':
-						echo "grafico";
+					case 'Os 5 melhores produtos avaliados':
+						$select="select max(media),nomeProduto from AVALIACAO a, AVALIACAO_PRODUTO ap, PRODUTO p,OPERADORA o where a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and a.idOperadora=o.idOperadora and o.nomeOperadora='$nome' group by nomeProduto order by media desc limit 0, 5;";
+						$result=$dbh->query($select);
+						$dados=$result->fetchAll();
+							$prod_cinco_melhores = new pData();
+							$prod_cinco_melhores->addPoints(array($dados[0][0],$dados[1][0],$dados[2][0],$dados[3][0],$dados[4][0]),"Média");
+							$prod_cinco_melhores->setAxisName(0,"MÉDIA");
+							$prod_cinco_melhores->addPoints(array($dados[0][1],$dados[1][1],$dados[2][1],$dados[3][1],$dados[4][1]),"Produtos");
+							$prod_cinco_melhores->setSerieDescription("Produtos","unidades");
+							$prod_cinco_melhores->setAbscissa("Produtos");
+							$prod_cinco_melhores->setAbscissaName("PRODUTOS");
+
+							/* Create the pChart object */
+							$prod_cinco_melhores_pic = new pImage(700,380,$prod_cinco_melhores);
+
+							/* Turn of Antialiasing */
+							$prod_cinco_melhores_pic->Antialias = FALSE;
+
+							/* Add a border to the picture */
+							$prod_cinco_melhores_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+
+							/* Set the default font */
+							$prod_cinco_melhores_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+							$prod_cinco_melhores_pic->drawText(300,0,"Os cinco produtos mais bem avaliados",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+
+							/* Define the chart area */
+							$prod_cinco_melhores_pic->setGraphArea(100,30,680,340);
+
+							/* Draw the scale */
+							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+							$prod_cinco_melhores_pic->drawScale($scaleSettings);
+
+							/* Turn on shadow computing */ 
+							$prod_cinco_melhores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+							/* Draw the chart */
+							$prod_cinco_melhores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+							$settings = array("DisplayValues"=>TRUE,"Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
+							$prod_cinco_melhores_pic->drawBarChart($settings);
+
+							/* Render the picture (choose the best way) */
+							$prod_cinco_melhores_pic->autoOutput("prod_cinco_melhores.png");
 						break;
-					case 'melhor x por 3':
-						echo "grafico";
+
+					case 'Os 5 piores produtos avaliados':
+						$select="select min(media),nomeProduto from AVALIACAO a, AVALIACAO_PRODUTO ap, PRODUTO p,OPERADORA o where a.idAvaliacao=ap.idAvaliacao and p.idProduto=ap.idProduto and a.idOperadora=o.idOperadora and o.nomeOperadora='$nome' group by nomeProduto order by media desc limit 0, 5;";
+						$result=$dbh->query($select);
+						$dados=$result->fetchAll();
+							$prod_cinco_piores = new pData();
+							$prod_cinco_piores->addPoints(array($dados[0][0],$dados[1][0],$dados[2][0],$dados[3][0],$dados[4][0]),"Média");
+							$prod_cinco_piores->setAxisName(0,"MÉDIA");
+							$prod_cinco_piores->addPoints(array($dados[0][1],$dados[1][1],$dados[2][1],$dados[3][1],$dados[4][1]),"Produtos");
+							$prod_cinco_piores->setSerieDescription("Produtos","unidades");
+							$prod_cinco_piores->setAbscissa("Produtos");
+							$prod_cinco_piores->setAbscissaName("PRODUTOS");
+
+							/* Create the pChart object */
+							$prod_cinco_piores_pic = new pImage(700,380,$prod_cinco_piores);
+
+							/* Turn of Antialiasing */
+							$prod_cinco_piores_pic->Antialias = FALSE;
+
+							/* Add a border to the picture */
+							$prod_cinco_piores_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+
+							/* Set the default font */
+							$prod_cinco_piores_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+							$prod_cinco_piores_pic->drawText(300,0,"Os cinco produtos menos bem avaliados",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+
+							/* Define the chart area */
+							$prod_cinco_piores_pic->setGraphArea(100,30,680,340);
+
+							/* Draw the scale */
+							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+							$prod_cinco_piores_pic->drawScale($scaleSettings);
+
+							/* Turn on shadow computing */ 
+							$prod_cinco_piores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+							/* Draw the chart */
+							$prod_cinco_piores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+							$settings = array("DisplayValues"=>TRUE,"Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
+							$prod_cinco_piores_pic->drawBarChart($settings);
+
+							/* Render the picture (choose the best way) */
+							$prod_cinco_piores_pic->autoOutput("prod_cinco_piores.png");
 						break;
-					case 'melhor 4 por y':
+
+					case 'Questões que mais e menos aumentaram a nota do produto':
 						echo "grafico";
 						break;
 				}
@@ -226,16 +305,95 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			case 'Serviços':
 				switch ($escolhido)
 				{
-					case 'melhor x por s':
-						echo "grafico";
-						break; 
-					case 'melhor d por y':
-						echo "grafico";
+					case 'Os 5 melhores serviços avaliados':
+						$select="select max(media),nomeServico from AVALIACAO a, AVALIACAO_SERVICO aser, SERVICO s, OPERADORA o where a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and a.idOperadora=o.idOperadora and o.nomeOperadora='$nome' group by nomeServico order by media limit 0, 5;";
+						$result=$dbh->query($select);
+						$dados=$result->fetchAll();
+							$serv_cinco_melhores = new pData();
+							$serv_cinco_melhores->addPoints(array($dados[0][0],$dados[1][0],$dados[2][0],$dados[3][0],$dados[4][0]),"Média");
+							$serv_cinco_melhores->setAxisName(0,"MÉDIA");
+							$serv_cinco_melhores->addPoints(array($dados[0][1],$dados[1][1],$dados[2][1],$dados[3][1],$dados[4][1]),"Serviços");
+							$serv_cinco_melhores->setSerieDescription("Serviços","unidades");
+							$serv_cinco_melhores->setAbscissa("Serviços");
+							$serv_cinco_melhores->setAbscissaName("SERVIÇOS");
+
+							/* Create the pChart object */
+							$serv_cinco_melhores_pic = new pImage(700,380,$serv_cinco_melhores);
+
+							/* Turn of Antialiasing */
+							$serv_cinco_melhores_pic->Antialias = FALSE;
+
+							/* Add a border to the picture */
+							$serv_cinco_melhores_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+
+							/* Set the default font */
+							$serv_cinco_melhores_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+							$serv_cinco_melhores_pic->drawText(300,0,"Os cinco produtos menos bem avaliados",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+
+							/* Define the chart area */
+							$serv_cinco_melhores_pic->setGraphArea(100,30,680,340);
+
+							/* Draw the scale */
+							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+							$serv_cinco_melhores_pic->drawScale($scaleSettings);
+
+							/* Turn on shadow computing */ 
+							$serv_cinco_melhores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+							/* Draw the chart */
+							$serv_cinco_melhores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+							$settings = array("DisplayValues"=>TRUE,"Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
+							$serv_cinco_melhores_pic->drawBarChart($settings);
+
+							/* Render the picture (choose the best way) */
+							$serv_cinco_melhores_pic->autoOutput("serv_cinco_melhores.png");
 						break;
-					case 'melhor x por 2':
-						echo "grafico";
+
+					case 'Os 5 piores serviços avaliados':
+						$select="select min(media),nomeServico from AVALIACAO a, AVALIACAO_SERVICO aser, SERVICO s, OPERADORA o where a.idAvaliacao=aser.idAvaliacao and s.idServico=aser.idServico and a.idOperadora=o.idOperadora and o.nomeOperadora='$nome' group by nomeServico order by media limit 0, 5;";
+						$result=$dbh->query($select);
+						$dados=$result->fetchAll();
+							$serv_cinco_piores = new pData();
+							$serv_cinco_piores->addPoints(array($dados[0][0],$dados[1][0],$dados[2][0],$dados[3][0],$dados[4][0]),"Média");
+							$serv_cinco_piores->setAxisName(0,"MÉDIA");
+							$serv_cinco_piores->addPoints(array($dados[0][1],$dados[1][1],$dados[2][1],$dados[3][1],$dados[4][1]),"Serviços");
+							$serv_cinco_piores->setSerieDescription("Serviços","unidades");
+							$serv_cinco_piores->setAbscissa("Serviços");
+							$serv_cinco_piores->setAbscissaName("SERVIÇOS");
+
+							/* Create the pChart object */
+							$serv_cinco_piores_pic = new pImage(700,380,$serv_cinco_piores);
+
+							/* Turn of Antialiasing */
+							$serv_cinco_piores_pic->Antialias = FALSE;
+
+							/* Add a border to the picture */
+							$serv_cinco_piores_pic->drawGradientArea(0,0,700,380,DIRECTION_VERTICAL,array("StartR"=>219,"StartG"=>215,"StartB"=>215,"EndR"=>219,"EndG"=>215,"EndB"=>215));
+
+							/* Set the default font */
+							$serv_cinco_piores_pic->setFontProperties(array("FontName"=>"../pChart2.1.3/fonts/verdana.ttf","FontSize"=>9));
+							$serv_cinco_piores_pic->drawText(300,0,"Os cinco produtos menos bem avaliados",array("FontSize"=>15,"Align"=>TEXT_ALIGN_TOPMIDDLE));
+
+							/* Define the chart area */
+							$serv_cinco_piores_pic->setGraphArea(100,30,680,340);
+
+							/* Draw the scale */
+							$scaleSettings = array("GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+							$serv_cinco_piores_pic->drawScale($scaleSettings);
+
+							/* Turn on shadow computing */ 
+							$serv_cinco_piores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+							/* Draw the chart */
+							$serv_cinco_piores_pic->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+							$settings = array("DisplayValues"=>TRUE,"Surrounding"=>-30,"InnerSurrounding"=>30,"Interleave"=>0);
+							$serv_cinco_piores_pic->drawBarChart($settings);
+
+							/* Render the picture (choose the best way) */
+							$serv_cinco_piores_pic->autoOutput("serv_cinco_piores.png");
 						break;
-					case 'melhor x por b':
+
+					case 'Questões que mais e menos aumentaram a nota do serviço':
 						echo "grafico";
 						break;
 				}
@@ -256,21 +414,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 				break;
 			
 			case 'Produtos':
-				echo "<option>melhor x por y</option>";
-				echo "<option>melhor 2 por y</option>";
-				echo "<option>melhor x por 3</option>";
-				echo "<option>melhor 4 por y</option>";
+				echo "<option>Os 5 melhores produtos avaliados</option>";
+				echo "<option>Os 5 piores produtos avaliados</option>";
+				echo "<option>Questões que mais e menos aumentaram a nota do produto</option>";
 				
 				break;
 				
 			case 'Serviços':
-				echo "<option>melhor x por s</option>";
-				echo "<option>melhor d por y</option>";
-				echo "<option>melhor x por 2</option>";
-				echo "<option>melhor x por b</option>";
+				echo "<option>Os 5 melhores serviços avaliados</option>";
+				echo "<option>Os 5 piores serviços avaliados</option>";
+				echo "<option>Questões que mais e menos aumentaram a nota do serviço</option>";
 				
 				break;
 			
+			//Maior e menor média de nota de questão de avaliacao
 		}
 	}
 }

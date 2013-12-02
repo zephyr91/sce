@@ -202,20 +202,42 @@ function listJuridico()
 	{
 		$('#relatorios_juridico').html(data).show();
 	});
+
 }
+
+
+function listProdServ()
+{
+	var tipo = document.getElementById('list_tipos_relatorios').value;
+
+	$.get('/php/relatoriosjuridico.php?tipo=' + tipo, function(data)
+	{
+		$('#relatorios_juridico').html(data).show();
+	});
+
+}
+
 
 function relatoriosJuridico()
 {
 	var escolhido = document.getElementById('relatorios_juridico').value;
 	var tipo = document.getElementById('list_tipos_relatorios').value;
 
-	$('#img_relatorio').attr('src', '/images/loader.gif');
-	
-	$.get('/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo, function(data)
-	{
-			grafico = '/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo
-			$('#img_relatorio').attr('src', grafico);
-	});
+	//if( escolhido == 'Questões que mais e menos aumentaram a nota do produto' || escolhido == 'Questões que mais e menos aumentaram a nota do serviço')
+	//{
+
+	//}
+
+	//else()
+	//{
+		$('#img_relatorio').attr('src', '/images/loader.gif');
+		
+		$.get('/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo, function(data)
+		{
+				grafico = '/php/relatoriosjuridico.php?escolhido=' + escolhido + '&tipo=' + tipo
+				$('#img_relatorio').attr('src', grafico);
+		});
+	//}
 }
 
 function listQuestoes()
